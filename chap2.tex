@@ -1,0 +1,630 @@
+\chapter{The theory behind the acoustic radiation force}
+
+\section{Fluid dynamics concepts}\label{intro.sec:fluids}
+In order to study the motion of fluids and elastic materials, it is necessary to describe this kind of physical system as a continuous medium where macroscopic variable are attributed, such as volume, density, pressure or other scalar or vector fields that may evolve in time and space (\cite{Landau} and \cite{Bruus2011_01}). The key reason behind the continuum hypothesis relies on the length scale of the total system to study. On lab-on-a-chip applications, where characteristic length scales are in the order of 100 $\mu$m similar to the magnetic microrotors experiment, there are already more than $10^{23}$ molecules per each space element of this size, thus, the system will be considered macroscopic. A limit for the length scale would be around 0.3 nm for fluids and 3 nm for gases, as these are characteristic order of magnitudes for inter-molecular distances, however, a minimum length to be dealt is not smaller than 10 $\mu$m, giving the possibility to develop all theoretical basis from continuum fluid mechanics \cite[sec.~1.1.2]{Bruus_book}. To be able to distinguish from one length scale to another, one the Knudsen number $\epsilon$ is used
+\begin{equation}
+    \epsilon = \frac{l_{\text{mfp}}}{L}
+\end{equation}
+the mean free path of the particles $l_{\text{mfp}}$ and the characteristic size of the system $L$. As this number is much less than unity, the continuum hypothesis is a valid treatment for fluids \cite[sec.~1.1]{Kruger}. In the continuum hypothesis any infinitesimal volume element is small compared to system size but large compared to the mean free path of particles, thus, there is no necessity on determining the dynamics of particles composed by the fluid but the dynamics of macroscopic fields dependent on the continuous space which are able to evolve in time. The description of these fields will be studied at any fixed position $\vec r = (x, y, z)$ of coordinates $r_1 = x$, $r_2 = y$ and $r_3 = z$ in the three-dimensional euclidean space. As Cartesian coordinates are used and tensorial fields are considered, the index notation is convenient to describe them. With index notation any vector $\vec A$ can be written as $A_i$ with $i=\{x_1,x_2,x_3\}\equiv\{x,y,z\}$, any matrix shall be written as $\mathbb{M} = M_{ij}$ and some symbols will be defined such as the Kronecker Delta $\delta_{ij}$ as a way to denote an identity matrix, and the Levi-Civita symbol $\epsilon_{ijk}$ valued 1 for any even permutation of $ijk$, -1 for any odd permutation of $ijk$ and 0 for any other case. An infinitesimal volume element of the fluid is taken such that will eventually move through all space. During an instant $\Delta t$ the fluid element makes a displacement that may be described by the vector displacement $D_i(\vec r,t)$. Also, at an instant $t$ the element will have an instantaneous velocity vector $u_i(\vec r,t)$ defined as
+\begin{equation}\label{intro.fluids.eq:u_fluid_def}
+    u_i = \frac{\partial D_i}{\partial t}\quad,
+\end{equation}
+This velocity is tracked only at $r_i$ instead of following the velocity of a same volume element which has moved after some time $\Delta t$ has passed. This way of describing the evolution of velocity or other fields is called an \textit{Eulerian picture} \cite{Bruus2011_01} which is the usual frame to describe the dynamic behavior of a fluid. 
+
+Other relevant macroscopic fields to describe the fluid are the density $\rho(\vec r,t)$ of the volume element, which depend on the mass of each particle $m_i$ composed by the fluid element and its volume $\Delta V$, so that is defined as
+\begin{equation}\label{intro.fluids.eq:rho_def}
+    \rho(\vec r, t) = \frac{\sum_{n\in \Delta V}m_n}{\Delta V}\quad;
+\end{equation}
+the momentum $J_i(\vec r,t)$ per unit volume which is naturally defined as
+\begin{equation}\label{intro.fluids.eq:J_def}
+    J_i(\vec r, t) = \rho(\vec r, t)u_i(\vec r,t)\quad,
+\end{equation}
+and of course the following thermodynamics variables can be associated to the fluid as the pressure $P(\vec r,t)$ or temperature $T(\vec r,t)$, among others. 
+
+These macroscopic fields are evolved in time and space by some partial differential equations which are defined as the following conservation laws: The mass conservation law and the momentum conservation law. Although energy conservation must also be included, this law shall be described instead using a thermodynamic state equation. Here will be presented the differential forms of these equations, if the reader is interested in the corresponding derivations, those are found in \cite{Landau} and \cite{Bruus_book}. The mass conservation is described with the continuity equation of the form
+\begin{equation}\label{intro.fluids.eq:mass_conservation}
+    \partial_t\rho + \partial_k(\rho u_k) = 0\quad,
+\end{equation} 
+where $\partial_t\equiv\partial/\partial t$ and  $\partial_i\equiv\partial/\partial x_i$. And the momentum conservation law is written as this vector partial differential equation:
+\begin{equation}\label{intro.fluids.eq:momentum_conservation_law}
+    \rho\partial_t u_i + \rho( u_k\partial_k)u_i = -\partial_i P + \eta\partial_k\partial_k u_i + \beta\eta\partial_i(\partial_k u_k)\quad,
+\end{equation}
+with $\eta$ the shear viscosity and $\beta$ a non-dimensional ratio. These last constants will be neglected as one of the limiting cases of this work, leading to a special form of the momentum equation called the \textit{Euler equation}:
+\begin{equation}\label{intro.fluids.eq:euler_equation}
+    \rho\partial_t u_i + \rho( u_k\partial_k)u_i = -\partial_i P \quad. 
+\end{equation}
+The force exerted by a fluid to an object immersed in the fluid is determined by the second law of Newton. This law basically states that any force made by the object is a momentum exchange between the fluid and the object. If the force per unit volume acting on the object is $F_i$ then the momentum change would be
+\begin{equation}\label{intro.fluids.eq:force_fluid_def}
+    f_i = \partial_t J_i\quad,
+\end{equation}
+then using \ref{intro.fluids.eq:J_def} and expanding the product of the derivative we get
+\begin{equation}\label{intro.fluids.eq:F_expand_derivative}
+    \partial_t J_i = \rho\partial_t u_i + u_i \partial_t\rho 
+\end{equation}
+and using mass conservation and Euler equation we get
+\begin{equation}\label{intro.fluids.eq:F_use_consv}
+    \partial_t J_i = -\partial_i P - (\rho u_k\partial_k) u_i -  u_i\partial_k(\rho u_k)\quad.
+\end{equation}
+Now the last two terms of \ref{intro.fluids.eq:F_use_consv} shall be rewritten using the divergence of an \textit{outer product} between $u_i$ and $\rho u_i$, computed as
+\begin{equation}\label{intro.fluids.eq:F_div_dyadic_product}
+    \partial_k\left( u_i(\rho u_k)\right) = (\rho u_k)\partial_k u_i + u_i \partial_k(\rho u_k)\quad,
+\end{equation}
+thus we shall write
+\begin{equation}\label{intro.fluids.F_tensor_1}
+     \partial_t J_i = -\partial_i P - \partial_k\left(\rho(u_i u_k)\right)\quad.
+\end{equation}
+The term related to pressure is not other thing than the divergence of the diagonal hydrostatic tensor. That is
+\begin{equation}
+    \partial_i P = \partial_k(\delta_{ki}P)\quad,
+\end{equation}
+and then it is possible to rewritte \ref{intro.fluids.eq:force_fluid_def} as the divergence of a second-order tensor of the form
+\begin{equation}\label{intro.fluids.eq:flux_momentum_tensor}
+    \Pi_{ik} \equiv \delta_{ik}P + \rho(u_i u_k)
+\end{equation}
+known as the \textit{momentum flux tensor}. Then, \ref{intro.fluids.eq:force_fluid_def} becomes
+\begin{equation}
+    f_i = -\partial_k\Pi_{ki}
+\end{equation}
+and the total force on the object would be gotten as the integration over all the volume $V_p$ of the particle, meaning
+\begin{equation}\label{intro.fluids.eq:Force_volume_tensor}
+    F_i = \int_{V_p} dV f_i  = -\int_{V_p} dV \partial_k\Pi_{ki}\quad.
+\end{equation}
+Finally, this expression may also be expressed not as an integral over a volume but as an integral over its surface, thanks to the divergence theorem. Thus, with $S_p$ the surface of the particle we have
+\begin{equation}\label{intro.fluids.eq:Force_surface_tensor}
+    F_i = -\oint_{\partial V_p} dS n_k\Pi_{ki}
+\end{equation}
+where $n_k$ is defined as a vector normal to the surface of the object. This expression will be a key to deduce the acoustic radiation force, and for this reason its derivation have been fully explained. Nevertheless, this deduction is explained with even more detail in \cite[app.~A]{Manneberg2009}. As a final remark, an ideal flow is defined as a velocity flow of the fluid where its curl is null, also known as irrotational flow, that is
+\begin{equation}\label{intro.fluids.eq:irrotational_flow}
+    \nabla\times\vec u = \partial_i u_j \epsilon_{ijk} = 0\quad.
+\end{equation}
+If a fluid flow fulfills \ref{intro.fluids.eq:irrotational_flow} then it is possible to calculate the velocity as the gradient of a scalar function called the \textit{velocity potential} $\phi$, defined such that
+\begin{equation}\label{intro.fluids.eq:velocity_potential}
+    \nabla\phi = \vec u\quad.
+\end{equation}
+This scalar field will be very useful to calculate the radiation force easily, as ideal flow can be considered in the microfluidics regime. 
+\section{Acoustic waves in an inviscid fluid}\label{intro.sec:acoustics}
+It is pretty well known that sound is essentially a perturbation of pressure in air or any other material which propagates in the form of waves, however as any other fluid, air is described by the mass and momentum conservation, also known as Navier-Stokes equations. However, in order to describe a transient oscillation through a medium the waves equation for a scalar quantity as, in this context the pressure, is useful. As NSE equations are non-linear, how are waves propagated through? in order to answer this question it is necessary to explain acoustics as small changes in density which produces small perturbations in pressure, as they are related to each other . This relationship is due to the state equation in the case of ideal gases or as the linear deformation of a material in the case of elastic solids and fluids as we will discuss later. As viscous forces are neglected, the pressure is the only component contributing to the dynamics of the fluid or gas. The pressure is steady and constant where the fluid is static and no net motion is carried. If the steady values for pressure and density are $p_0$ and $\rho_0$ respectively, then an acoustic wave is basically a perturbation of the pressure around this constant value, then the total pressure $P$ would be the steady one plus the small perturbation due to the acoustic wave. That is
+\begin{subequations}\label{intro.acoustics.eq:expand}
+\begin{equation}\label{intro.acoustics.eq:expand_rho}
+    \rho = \rho_0 + \rho_1\quad,
+\end{equation}  
+\begin{equation}\label{intro.acoustics.eq:expand_p}
+    P = p_0 + p_1\quad,
+\end{equation}  
+\end{subequations}
+where $p_1$ and $\rho_1$ are small contributions relative to the steady pressure $p_0$ and density $\rho_0$, respectively (\cite[p.~136]{Elmore} and \cite[p.~251]{Landau}). The variation $p_1$ must be strictly related to the deformation or strain of a small spatial element of the fluid while $\rho_1$ to the aggregation or absence of matter. Considering only one direction selected from the coordinate $x$ to a further location $x + \Delta x$, where $\Delta x$ is the size of the element, a displacement between two points of the material $\xi$ is changed to $\xi+\Delta\xi$ due to a force $f_x$ applied, then the elongation $\epsilon$ is 
+\begin{equation}
+    \epsilon = \frac{\Delta\xi}{\Delta x}\rightarrow\frac{\partial\xi}{\partial x}\quad,
+\end{equation}
+and the force per area unit is denoted as 
+\begin{equation}
+    \sigma = \frac{f_x}{S}
+\end{equation}
+with $S$ the cross-section of the element. Both quantities $\epsilon$ and $\sigma$ follow the Hooke's law as a liner relationship between them, of the form
+\begin{equation}
+    \sigma = Y\epsilon\quad,
+\end{equation}
+being $Y$ the Young's Modulus \cite[p.~72]{Elmore}. As this is an uni-dimensional case, the three-dimensional case considers instead an element of volume $\Delta x\Delta y\Delta z$ and the displacement is denoted by the vector $\vec D = (\xi,\eta,\zeta)$ and with it the total dilation $\theta$ defined as 
+\begin{equation}
+    \theta = \frac{\Delta V}{V} = \frac{\left(\Delta x + \frac{\partial\xi}{\partial x}\Delta x\right)\left(\Delta y + \frac{\partial\eta}{\partial y}\Delta y\right)\left(\Delta 
+    z + \frac{\partial\zeta}{\partial z}\Delta z\right) - \Delta x\Delta y\Delta z}{\Delta x\Delta y\Delta z} = \frac{\partial\xi}{\partial x} + \frac{\partial\eta}{\partial y} + \frac{\partial\zeta}{\partial z} = \nabla\cdot\vec D
+\end{equation}
+where products between derivatives were neglected because dilatations are small compared to the volume of the element, hence small compared with the total volume of the fluid. This assumption meets the requirement that only small compression or elongations are considered were pressure does not reach high values, and the force applied along the entire volume element is the pressure $P$. Then the Hook's law in the tree-dimensional case is 
+\begin{equation}\label{intro.acoustics.eq:Hook_law_3D}
+    p_1 = -B\theta = -B\left(\nabla\cdot\vec D\right)\quad,
+\end{equation}
+being $B$ the Bulk's modulus \cite[p.~136]{Elmore}. Notice that the left side of \ref{intro.acoustics.eq:Hook_law_3D} is the small perturbation of the total pressure $P$ introduced in \ref{intro.acoustics.eq:expand_p}, this means that any small change in the pressure will provoke a small proportional and relative change in the volume, giving the following definition for the Bulk's modulus:
+\begin{equation}\label{intro.acoustic.eq:Bulk_thermodynamic}
+    B = -V\frac{\Delta P}{\Delta V} \rightarrow -V\frac{dP}{dV}\quad,
+\end{equation}
+useful to describe sound propagation in gases, as will be done later. The force experienced in the $x$ direction would be
+\begin{equation}
+    \Delta F_x = p_1\Delta y \Delta z - \left(p_1 + \frac{\partial p_1}{\partial x}\Delta x\right)\Delta y \Delta z = - \frac{\partial p_1}{\partial x}\Delta x \Delta y \Delta z
+\end{equation}
+which is the difference between the pressure times the cross-section of the element $\Delta y\Delta z$ at $x$ and at $x+\Delta x$, where the pressure changes an amount of $\frac{\partial p_1}{\partial x}\Delta x$. For $\Delta F_y$ and $\Delta F_z$ is analogous, such that the vector force applied to the volume element is
+\begin{equation}\label{intro.acoustics.eq:F_DxDyDz_cube}
+    \vec{\Delta F} = (\Delta F_x, \Delta F_y, \Delta F_z) = -\left(\frac{\partial p_1}{\partial x}, \frac{\partial p_1}{\partial y}, \frac{\partial p_1}{\partial z}\right)\Delta x\Delta y\Delta z = -\vec{\nabla} p_1 \Delta x\Delta y\Delta z\quad.
+\end{equation}
+As this force generates an acceleration in the volume element of $\partial^2\vec D/\partial t^2$ and its mass is $\rho_0\Delta x\Delta y\Delta z$, this motion may be described by the second law of Newton as
+\begin{equation}
+    \vec{\Delta F} = \rho_0\frac{\partial^2\vec D}{\partial t^2}\Delta x\Delta y\Delta z\quad,
+\end{equation}
+which may be rewritten using \ref{intro.acoustics.eq:F_DxDyDz_cube} as
+\begin{equation}\label{intro.acoustics.eq:sec_newton_1}
+    -\vec\nabla p_1 = \rho_0\frac{\partial^2\vec D}{\partial t^2}\quad.
+\end{equation}
+Calculating the divergence at both sides of 
+\ref{intro.acoustics.eq:sec_newton_1} and using \ref{intro.acoustics.eq:Hook_law_3D} we get
+\begin{equation}\label{intro.acoustics.eq:waves_p_Elmore}
+    \nabla^2 p_1 = \frac{\rho_0}{B}\frac{\partial^2p_1}{\partial t^2} \quad,
+\end{equation}
+which is the form of the waves equation gathered as a consequence of considering the fluid as a newtonian and isotropic material were viscous forces were not considered and pressure variations are very small compared to $p_0$. Here we may identify the square of the sound speed as $B/\rho_0$ which is consistent with the fact that the unit of $B$ is pressure according to \ref{intro.acoustics.eq:Hook_law_3D} and if we divide pressure units over density units a square speed units are gotten. This allow us to define the sound speed in the fluid as 
+\begin{equation}\label{intro.acoustics.eq:sound_speed_bulk}
+    c = \sqrt{\frac{B}{\rho_0}}\quad.
+\end{equation}
+However this definition is for now relying under pure mathematical consistency and no physical meaning has been provided, thus, it is time to discuss the physical meaning behind \ref{intro.acoustics.eq:sound_speed_bulk}. 
+
+Any compressible, newtonian and isotropic material satisfies \ref{intro.acoustics.eq:waves_p_Elmore} as was explained earlier, but sound may be also propagated through air, which is a gas, and under room temperature and standard pressure conditions it may be considered as an ideal gas. Thus, it is possible to study sound propagation under the parameters of Thermodynamics such as pressure $P$, volume $V$ and temperature $T$, including the molecular weight $m_{\text{mol}}$, the total number of particles $N$ and the number density $n = \rho_0/N$, also defined as $n = M/\mu$ with $M$ the total mass of the gas. In thermodynamics is essential to rely on the state equation, which is a functional relationship between all the mentioned thermodynamic variables. For ideal gases, the well known state equation is
+\begin{equation}\label{intro.acoustics.eq:ideal_gas}
+    PV = Nk_BT\quad,
+\end{equation}
+with $k_B = 1.38\times10^{-23}$ J/K the Boltzmann's constant. A simple deduction may be gotten considering an expansion or contraction of the gas, but what kind of thermodynamic process is behind this compression or expansion? This question was first answered by Isaac Newton in 1686, who concluded the expansion and contraction process of sound waves are done during an \textit{isothermic} process, arguing negligible changes of temperature as this one remains constant through all space occupied by air. With this in mind, \ref{intro.acoustics.eq:ideal_gas} becomes
+\begin{equation}\label{intro.acoustics.eq:ideal_gas_iso}
+    PV = \text{constant}\quad,
+\end{equation}
+that differentiated and with \ref{intro.acoustic.eq:Bulk_thermodynamic} and \ref{intro.acoustics.eq:ideal_gas} is
+\begin{equation}\label{intro.acoustics.eq:iso_bulk}
+P = - V\frac{dP}{dV} = B = \rho_0\frac{k_B T}{m_\text{mol}}\quad,
+\end{equation}
+such that associating \ref{intro.acoustics.eq:iso_bulk} the isothermic speed of sound $c_{iso}$ is gotten as
+\begin{equation}\label{intro.acoustics.eq:iso_sound_speed}
+    c_\text{iso} = \sqrt{\frac{k_B T}{m_\text{mol}}}\quad.
+\end{equation}
+The value of the sound speed on air using \ref{intro.acoustics.eq:iso_sound_speed} at a room temperature of 300 K is about 293 m/s, which is pretty far from the actual value, which is close to 343 m/s at this same temperature. Something was wrong in the Newton's deduction and no correction was developed until 1816 by Laplace, who concluded that the mistake was to consider an isothermic expansion. Instead, he argued that the expansion and contraction of sound waves would keep the entropy constant rather than temperature, implying an adiabatic process. For this kind of process the following relationship is valid:
+\begin{equation}\label{intro.acoustics.eq:ideal_gas_ad}
+    PV^\gamma = \text{constant}\quad,
+\end{equation}
+being $\gamma$ the adiabatic constant defined as the quotient between the heat capacities at constant volume and constant pressure. For air this value is around $1.4$ and differs for different kind of gases, however we are interested to see how accurate is this approach respect to the isothermic one. By doing a differentiation of \ref{intro.acoustics.eq:ideal_gas_ad} and using \ref{intro.acoustic.eq:Bulk_thermodynamic} we get
+\begin{align}
+    dPV^\gamma + \gamma\frac{PV^\gamma}{V}dV &= 0 \nonumber\\
+    -V\frac{dP}{dV} &= \gamma P \\
+    B_{\text{ad}} &= -\gamma P\label{intro.acoustics.eq:ad_bulk}
+\end{align}
+and with \ref{intro.acoustics.eq:ideal_gas} the adiabatic sound speed $c_{\text{ad}}$ is gotten as
+\begin{equation}\label{intro.acoustics.eq:iso_sound_speed}
+    c_{\text{ad}} = \sqrt{\frac{\gamma k_B T}{m_\text{mol}}}\quad.
+\end{equation}
+This last expression gives a value close to 347 m/s at a temperature of 300 K, which agrees enough to the measured value. If we want to obtain a closer value, dissipation of sound due to viscosity must be under consideration. As soon as temperature does not develop larger changes than its value, just as pressure or density, there is no loss of generality if this value is kept as a constant, in consequence, the Bulk modulus will be the average steady pressure $p_0$ for the isothermic case and $\gamma p_0$ for the adiabatic case. However the speed of sound may depend of elastic stiffness as we see in \ref{intro.acoustics.eq:sound_speed_bulk}, where the Bulk's modulus is mainly dependent on the average of density and temperature. As in both cases the gas was considered ideal there will be a linear relationship between the pressure and the density of the gas by rewriting \ref{intro.acoustics.eq:ideal_gas} as
+\begin{equation}\label{intro.acoustics.eq:linear_P_total_rho}
+    P = c_0^2\rho\quad,
+\end{equation}
+as well as a linear relation between the small variations of pressure and density, considering \ref{intro.acoustics.eq:expand_p} and \ref{intro.acoustics.eq:sound_speed_bulk}:
+\begin{equation}\label{intro.acoustics.eq:linear_p_rho}
+    p_1 = c_0^2\rho_1\quad,
+\end{equation}
+where $c_0^2$ would be either the isothermal speed of sound $c_{\text{iso}}$ or the adiabatic speed of sound $c_{\text{ad}} = c_{\text{iso}}/\sqrt{\gamma}$. This linear relationship will be useful to prove how waves equation are also affecting the density and other macroscopic quantities of the medium \cite[p.~139-142]{Elmore}.\\ 
+
+In general, there are compressible fluids where the pressure is only dependent on the density without being strictly a linear relationship. This kind of fluids are considered \textit{barotropic} and the pressure in this case can be written as a Taylor expansion in the density around $\rho_0$
+\begin{equation}\label{intro.acoustics.eq:pressure_taylor}
+    P = p_0 + (\rho-\rho_0)\left(\frac{\partial P}{\partial\rho}\bigg|_{p_0}\right)_S + \frac{1}{2}(\rho-\rho_0)^2\left(\frac{\partial^2P}{\partial\rho^2}\bigg|_{p_0}\right)_S + \dots 
+\end{equation}
+From \ref{intro.acoustics.eq:linear_p_rho} is easy to notice that
+\begin{equation}\label{intro.acoustics.eq:c2_dp_drho}
+    c_0^2 = \left(\frac{\partial P}{\partial\rho}\bigg|_{p_0}\right)_S\quad,
+\end{equation}
+which is the most general expression to obtain a consistency with \ref{intro.acoustics.eq:linear_p_rho}. \ref{intro.acoustics.eq:pressure_taylor} also gives a general determination of $p_1$, and the sub-index notation of this quantity will be from now on related to the first order term of \ref{intro.acoustics.eq:pressure_taylor}. If only the first order terms for both density and pressure, then is possible to rewrite \ref{intro.acoustics.eq:expand} as
+\begin{subequations}\label{intro.acoustics.eq:expand_first_order}
+\begin{equation}\label{intro.acoustics.eq:expand_rho_first}
+    \rho = \rho_0 + \rho_1\quad,
+\end{equation}
+\begin{equation}\label{intro.acoustics.eq:expand_p_first}
+    P = p_0(\rho_0) + c_0^2\rho_1\quad,
+\end{equation}    
+\begin{equation}\label{intro.acoustics.eq:expand_u_first}
+    \vec u = \vec 0 + \vec u_1\quad,
+\end{equation}
+\end{subequations}
+Although we already have shown how the waves equation is gotten for any elastic medium under the mentioned conditions, is time to see how this same equation can be deducted from the NSE equations, which are the most general laws to predict the dynamics of any fluid or elastic medium. NSE equations were introduced in section \ref{intro.sec:fluids} as a general description for the dynamics of any fluid. Here, as viscous effects are neglected, the equations to use would be \ref{intro.fluids.eq:mass_conservation} and \ref{intro.fluids.eq:euler_equation} to be linearized using \ref{intro.acoustics.eq:expand_first_order} and \ref{intro.acoustics.eq:expand_u_first} into \ref{intro.fluids.eq:mass_conservation} and \ref{intro.fluids.eq:euler_equation} . By doing so, only first order terms must be kept, meaning that products of first order terms are also neglected, such that the mass conservation law and the Euler equation expanded up to first order take the following form:
+\begin{subequations}\label{intro.acoustics.eq:linear_NSE_eqs}
+\begin{equation}\label{intro.acoustics.eq:linear_mass_conservation}
+    \frac{\partial\rho_1}{\partial t} + \rho_0\nabla\cdot\vec u_1 = 0\quad,
+\end{equation}    
+\begin{equation}\label{intro.acoustics.eq:linear_momentum_conservation_law}
+    \rho_0\frac{\partial\vec u_1}{\partial t} +\nabla p_1 = 0\quad.
+\end{equation}
+\end{subequations}
+Now, combining these equations by calculating the diveregence at both sides of \ref{intro.acoustics.eq:linear_momentum_conservation_law} leads to
+\begin{equation}
+    \rho_0\frac{\partial}{\partial t}(\nabla\cdot\vec u_1) +\nabla^2 p_1 = 0\quad.
+\end{equation}
+and using \ref{intro.acoustics.eq:linear_mass_conservation} the waves equation is obtained:
+\begin{align}
+    \rho_0\frac{\partial}{\partial t}\left(-\frac{1}{\rho_0}\frac{\partial\rho_1}{\partial t}\right) +\nabla^2 p_1 &= 0 \nonumber\\
+    \frac{\partial^2\rho_1}{\partial t^2} = \nabla^2 p_1\nonumber\\
+    \frac{1}{c_0^2}\frac{\partial^2p_1}{\partial t^2} = \nabla^2 p_1\label{intro.acoustics.eq:waves_eq_from_NSE}
+\end{align}
+where \ref{intro.acoustics.eq:linear_p_rho} was used. The reader would notice that the density also fulfills the waves equation as it increases linearly with the pressure. With this final remark the acoustic waves phenomena was detailed explained in two approaches: As the propagation of linear deformation of newtonian and isotropic fluid and linearizing the Navier-Stokes equations from a Taylor expansion over pressure up to first order. Both paths are equivalent in the sense that both rely on small adiabatic compressions and expansions of the medium and only linear relations between the deformation and the stress were assumed. However, if one wants to calculate the hydrodynamic force over an object immersed in the fluid, experimental observations such as acoustic radiation force are not visible if we keep at first order approximations, as done in this section, because those effects are only visible and measurable as quantities averaged in time and any field with harmonic dependence will have a null average over time. In order to explain these effects, it is necessary to develop an expansion for the fields at least to second order \cite[sec.~III]{Bruus2012_02}. This will be fully explained in the next section. 
+
+\section{A general expression of the Acoustic Radiation Force}\label{intro.sec:arf}
+As it was discussed in section \ref{intro.sec:fluids},particularly in equation \ref{intro.fluids.eq:Force_surface_tensor}, the force can be expressed as the integration of the \textit{flux of momentum tensor} through a surface enclosing the particle. Any particle or small body immersed, in a fluid with the presence of a standing acoustic pressure, fields will experience a time-averaged force once the acoustic field have reached a steady state. This kind of force is known as the \textit{acoustic radiation force} and it is responsible for displacing the particle towards the node (or anti-node) if its size is much smaller than the wavelength. In section \ref{intro.sec:acoustics} it was shown how linear waves equation is obtained by considering a first order approximation for acoustic fields in continuity and Euler equations, however, if we try to determine the acoustic radiation force via \ref{intro.fluids.eq:Force_surface_tensor} and neglecting the second term of \ref{intro.fluids.eq:flux_momentum_tensor} for being second term, we would get
+\begin{equation}\label{intro.arf.eq:Force_pressure}
+    \vec F = -\oint_{\partial V_p} p_1(\vec r,t) \hat n dS \quad, 
+\end{equation}
+being dependent only on harmonic pressure, meaning that there would have no effect in the time-averaged motion of the particle, as any harmonic field have a null time-average despite it is predominant respect to higher orders. As the linear contribution is not enough, it is necessary to develop a perturbative expansion for the pressure up to second order, such that the calculated force include non-linear terms that will eventually remain in the time-averaged force. This development will be shown in the current section. First ideal flow is considered and the second-order perturbative expansion is developed. Then, the second order contributions will be expressed in terms of the first order contributions, which satisfy waves equation, such that the necessity to solve non-linear equations as \ref{intro.fluids.eq:mass_conservation} and \ref{intro.fluids.eq:euler_equation} will be avoided. After this evaluation, the waves equation shall be solved, using the proper boundary conditions at the particle surface, in order to compute the radiation acoustic force due to the pressure and velocity field scattered by the particle, in terms of the known incident fields.
+\subsection{The second order acoustic fields}
+Following the brief scheme of Gor'kov \cite{Gorkov1962,Bruus2012_07,Manneberg2009}, the acoustic radiation force on a particle immerse on a fluid is deducted from hydrodynamics in ideal fluids, in which the velocity field may be written as the gradient of a scalar velocity potential $\phi$ defined in \ref{intro.fluids.eq:velocity_potential} By considering ideal flow it is possible to solve the waves equation for only the velocity potential instead of dealing with a scalar pressure field and a vectorial velocity. Now using \ref{intro.acoustics.eq:expand_first_order} into \ref{intro.acoustics.eq:linear_NSE_eqs}, the first order harmonic contribution of the velocity and pressure are related with $\phi$ as
+\begin{equation}\label{intro.arf.eq:grad_phi_u1}
+    \vec u_1 = \nabla\phi\quad,
+\end{equation}
+\begin{equation}\label{intro.arf.eq:time_phi}
+    p_1 = -\rho_0\frac{\partial\phi}{\partial t}\quad,
+\end{equation}
+and the waves equation is automatically gotten looking at \ref{intro.acoustics.eq:linear_mass_conservation}
+\begin{equation}\label{intro.arf.eq:potential_waves}
+    \frac{1}{c_0^2}\frac{\partial^2\phi}{\partial t^2} = \nabla^2\phi\quad.
+\end{equation}
+Now it is time to develop a perturbative expansion up to second order as done in \ref{intro.acoustics.eq:expand_first_order}. Then
+\begin{subequations}\label{intro.arf.eq:expand_second_order}
+\begin{equation}\label{intro.arf.eq:expand_rho_second}
+    \rho = \rho_0 + \rho_1 + \rho_2\quad,
+\end{equation}
+\begin{equation}\label{intro.arf.eq:expand_p_second}
+    P = p_0(\rho_0) + p_1 + p_2\quad\text{ and}
+\end{equation}    
+\begin{equation}\label{intro.arf.eq:expand_u_second}
+    \vec u = \vec 0 + \vec u_1 + \vec u_2\quad,
+\end{equation}
+\end{subequations}
+such that the conservation laws will be written in terms of the unknown terms $p_2$ and $\vec u_2$ in the following form:
+\begin{subequations}\label{intro.arf.eq:nonlinear_NSE_eqs}
+\begin{equation}\label{intro.arf.eq:nonlinear_mass_conservation}
+    \frac{\partial\rho_2}{\partial t} + \rho_0\nabla\cdot\vec u_2 + \nabla\cdot(\rho_1\vec u_1) = 0\quad,
+\end{equation}    
+\begin{equation}\label{intro.arf.eq:nonlinear_momentum_conservation_law}
+    \rho_0\frac{\partial\vec u_2}{\partial t} + \rho_1\frac{\partial\vec u_1}{\partial t} + \nabla p_2 + \rho_0(\vec u_1\cdot\nabla)\vec u_1 = 0\quad.
+\end{equation}
+\end{subequations}
+Note that \ref{intro.acoustics.eq:linear_NSE_eqs} was used and higher order terms, like products between first and second order terms, were neglected. The last term of the left side of \ref{intro.arf.eq:nonlinear_momentum_conservation_law} may be rewritten by using the next mathematical property:
+\begin{equation}\label{intro.arf.eq:double_dev_property}
+    \frac{1}{2}\nabla(\vec u_1\cdot\vec u_1) = (\vec u_1\cdot\nabla)\vec u_1 + \vec u_1 \times (\nabla \times \vec u_1)\quad,
+\end{equation}
+but due to irrotational flow condition the cross-product term vanishes due to \ref{intro.fluids.eq:irrotational_flow}, then
+\begin{equation}\label{intro.arf.eq:double_dev_property_simp}
+    \frac{1}{2}\nabla(\vec u_1\cdot\vec u_1) = (\vec u_1\cdot\nabla)\vec u_1\quad,
+\end{equation}
+then \ref{intro.arf.eq:nonlinear_momentum_conservation_law} becomes
+\begin{equation}
+    \rho_0\frac{\partial\vec u_2}{\partial t} + \rho_1\frac{\partial\vec u_1}{\partial t} + \nabla p_2 + \frac{\rho_0}{2}\nabla(u_1^2) = 0\quad.
+\end{equation}
+By using \ref{intro.acoustics.eq:linear_p_rho} and \ref{intro.acoustics.eq:linear_momentum_conservation_law} the second term of the left side may be written as
+\begin{equation}
+    \rho_0\frac{\partial\vec u_2}{\partial t} - \frac{p_1}{\rho_0 c^2}\nabla p_1 + \nabla p_2 + \frac{\rho_0}{2}\nabla(u_1^2) = 0\quad
+\end{equation}
+and using the product derivative property for gradients we end up with
+\begin{equation}
+    \rho_0\frac{\partial\vec u_2}{\partial t} + \nabla p_2 =  \frac{1}{2\rho_0 c_0^2}\nabla(p_1^2) - \frac{\rho_0}{2}\nabla(u_1^2)\quad.
+\end{equation}
+As we are interested in writing the total velocity and pressure fields in terms of only first-order terms, we may add equation \ref{intro.acoustics.eq:linear_momentum_conservation_law} as a zero such that, using \ref{intro.arf.eq:expand_p_second} and \ref{intro.arf.eq:expand_u_second} we have
+\begin{align}
+    \rho_0\frac{\partial\vec u_2}{\partial t} + \rho_0\frac{\partial\vec u_1}{\partial t} + \nabla p_2 + \nabla p_1 &=  \frac{1}{2\rho_0 c_0^2}\nabla(p_1^2) - \frac{\rho_0}{2}\nabla(u_1^2)\nonumber\\
+    \rho_0\frac{\partial\vec u}{\partial t} + \nabla (P - p_0) &= \nabla\left(\frac{1}{2\rho_0 c^2}p_1^2 - \frac{\rho_0}{2}u_1^2\right)\quad.
+\end{align}
+Now by using \ref{intro.fluids.eq:velocity_potential} we end up with a total non-static pressure written as follows:
+\begin{equation}\label{intro.arf.eq:euler_king_gradient}
+    \nabla(P - p_0) = \nabla\left(\frac{p_1^2}{2\rho_0 c_0^2} - \frac{\rho_0}{2}u_1^2 - \rho_0\frac{\partial\phi}{\partial t}\right)\quad.
+\end{equation}
+Using the Euler equation to write the pressure in terms of $\phi$, one can write the time average of \eqref{intro.fluids.eq:Force_surface_tensor} as
+\begin{equation}\label{intro.arf.eq:general_arf}
+    \langle F_{i} \rangle = - \oint \left\langle\left(-\rho_0\frac{u_1^2}{2}+\frac{p_1^2}{2\rho_0c_0^2}\right)\delta_{ij}+\rho_0 v_iv_j\right\rangle dS_j \quad,
+\end{equation}
+vanishing the time average of the term given by \eqref{intro.arf.eq:euler_king_gradient} due to be harmonic according to \ref{intro.arf.eq:potential_waves}. This same expression \ref{intro.arf.eq:general_arf} may be also written in terms of the potential as follows:
+\begin{equation}\label{intro.arf.eq:general_arf_phi}
+    \langle F_{i} \rangle = - \oint \left\langle\left(-\frac{\rho_0}{2}|\nabla\phi|^2+\frac{\rho_0}{2c_0^2}\left[\frac{\partial\phi}{\partial t}\right]^2\right)\delta_{ij}+\rho_0 \partial_i\phi\partial_j\phi\right\rangle dS_j \quad,
+\end{equation}
+implying the possibility of solving the velocity scalar potential which satisfies only one waves equation. As this general expression is written in terms of the scalar velocity potential field, the acoustic radiation force for any object will be found by solving \eqref{intro.arf.eq:potential_waves} with the proper boundary conditions. In the next section we will be showing, with all possible details, how to solve this equation for a compressible sphere following the Gor'kov approach summarized in his famous paper \cite{Gorkov1962}. 
+\subsection{The Gor'kov radiation acoustic force for a compressible sphere}
+Decomposing the velocity potential as an incident field and a scattered field lets the study of the object as a weak point-scatterer which propagates a scattered field as a response of an incident wave. This is known as the first order scattering theory. Thus, it is necessary to consider a spherical particle of radius $R_p$ as a point particle such that the far-field approximation, written as
+\begin{equation}\label{intro.arf.eq:R_ll_lambda}
+    R_p\ll\lambda\quad,
+\end{equation}
+where $\lambda$ is the wavelength of the acoustic field, is fulfilled. By doing this approximation it is possible to solve \eqref{intro.arf.eq:potential_waves} separating the potential field as an incident field going through the object and a scattered field generated by the presence of the object. For the velocity potential field we have
+\begin{equation}\label{intro.arf.eq:in_sc_potential}
+    \phi = \phi_{\text{in}} + \phi_{\text{sc}}\quad,    
+\end{equation}
+for the acoustic fields
+\begin{equation}\label{intro.arf.eq:in_sc_velocity}
+    \vec u_1 = \vec u_{\text{in}} + \vec u_{\text{sc}}
+\end{equation}
+and
+\begin{equation}\label{intro.arf.eq:in_sc_pressure}
+    p_1 = p_{\text{in}} + p_{\text{sc}}\quad.
+\end{equation}
+The incident field $\phi_{\text{in}}$ would be the solution for the ongoing waves in the medium as if there was no spherical particle, while the scattered field $\phi_{\text{sc}}$ would be the subtraction of the actual field and the incident field, as the outgoing reflected waves due to the presence of the object which must be decreasing functions of the distance of the particle, thus, may be written as a multipolar expansion as follows:
+\begin{equation}\label{intro.arf.eq:sc_multipoles}
+    \phi_{sc} = -\frac{a(t_{\text{ret}})}{r} + (\vec A(t_{\text{ret}}) \cdot \nabla)\frac{1}{r} + \dots
+\end{equation}
+where $t_{\text{ret}} = t - r/c_0$ is the retarded time. The reader can notice that this is a retarded solution of the Laplace equation. The reason to write the solution in the form of \eqref{intro.arf.eq:sc_multipoles} is to be able to notice a separation of the time-scales where the action of the object to the medium is almost instantaneous by using \eqref{intro.arf.eq:R_ll_lambda} and evaluating the fields very close to the particle ($r \approx R_p $), leading to
+\begin{align}
+    t_{\text{ret}} &= t - \frac{R_p}{c_0} \nonumber\\
+    t_{\text{ret}} &= t - \frac{R_p}{\lambda}T \nonumber\\
+    t_{\text{ret}} &\approx t\quad,\label{intro.arf.eq:t_ret_approx}
+\end{align}
+such that \eqref{intro.arf.eq:potential_waves} becomes a Laplace equation
+\begin{equation}\label{intro.arf.eq:laplace_potential}
+    \nabla^2\phi = \nabla\cdot(\nabla\phi) = \nabla\cdot\vec u_1 = 0
+\end{equation}
+reflecting the fact that nearby the boundary of the object the outer fluid is behaving nearly incompressible. With the separation of the velocity potential as the superposition of an incident and a scattered field it is possible to simplify \eqref{intro.arf.eq:general_arf_phi} by plugging in \eqref{intro.arf.eq:in_sc_potential} and expanding the terms, such that the following contributions are gathered: First, one term with only information of the incident field
+\begin{equation}\label{intro.arf.eq:force_in_in}
+    -\oint\left\langle\left(-\frac{\rho_0}{2}|\nabla\phi_{\text{in}}|^2 + \frac{\rho_0}{2c_0^2}\left[\frac{\partial\phi_{\text{in}}}{\partial t}\right]^2\right)\delta_{ij} + \rho_0\partial_i\phi_{\text{in}}\partial_j\phi_{\text{in}}\right\rangle dS_i\quad,
+\end{equation}
+as the incident field would be the solution in absence of the object, there for it does not have any physical effect on the particle, also, considering the fact that for the interest case of plane waves, the incident field is spatially homogeneous implying a symmetry over the surface and there for yielding zero. The other two contributions containing information about the scattered wave are
+\begin{equation}\label{intro.arf.eq:force_sc_sc}
+    -\oint\left\langle\left(-\frac{\rho_0}{2}|\nabla\phi_{\text{sc}}|^2 + \frac{\rho_0}{2c_0^2}\left[\frac{\partial\phi_{\text{sc}}}{\partial t}\right]^2\right)\delta_{ij} + \rho_0\partial_i\phi_{\text{sc}}\partial_j\phi_{\text{sc}}\right\rangle dS_i
+\end{equation}
+and
+\begin{equation}\label{intro.arf.eq:force_in_sc}
+    -\oint\left\langle\left(-\rho_0\nabla\phi_{\text{in}}\cdot\nabla\phi_{\text{sc}} + \frac{\rho_0}{c_0^2}\left[\frac{\partial\phi_{\text{in}}}{\partial t}\right]\left[\frac{\partial\phi_{\text{sc}}}{\partial t}\right]\right)\delta_{ij} + \rho_0\partial_i\phi_{\text{in}}\partial_j\phi_{\text{sc}} + \rho_0\partial_i\phi_{\text{sc}}\partial_j\phi_{\text{in}}\right\rangle dS_i\text{ .}
+\end{equation}
+The second contribution written in \eqref{intro.arf.eq:force_sc_sc}, only in terms of the scattered field, becomes smaller than the third term because the scattering cross-section of a spherical particle is proportional to $(kR_p)^4$, which is negligible due to \eqref{intro.arf.eq:R_ll_lambda}, also because the scattered potential field solution is proportional to $R_p^3$ as will be shown later. Thus, the interference term \eqref{intro.arf.eq:force_in_sc} is the most contributing one of the force and that's the one to be developed \cite[~p.79]{Manneberg2009}. Taking into account \eqref{intro.arf.eq:grad_phi_u1} and \eqref{intro.arf.eq:time_phi} the following terms will be rewritten in terms of the macroscopic fields defined in \eqref{intro.arf.eq:in_sc_velocity} and \eqref{intro.arf.eq:in_sc_pressure}:
+\begin{subequations}\label{intro.arf.eq:phi_fields}
+\begin{equation}\label{intro.arf.eq:force_grad_vel}
+    \nabla\phi_{in}\cdot\nabla\phi_{sc} = \vec u_{in}\cdot\vec u_{sc}\quad,
+\end{equation}    
+\begin{equation}\label{intro.arf.eq:force_phi_rho}
+    \frac{\rho_0}{c_0^2}\frac{\partial\phi_{in}}{\partial t}\frac{\partial\phi_{sc}}{\partial t} = \frac{c_0^2}{\rho_0}\rho_{in}\rho_{sc}\quad\text{ and}
+\end{equation}    
+\begin{equation}
+    \partial_i\phi_{\text{in}}\partial_j\phi_{\text{sc}} = u_{\text{in}}^{i}u_{\text{sc}}^{j}\quad.
+\end{equation}
+\end{subequations}
+In order to simplify this term the Gauss theorem is used to transform the surface integral into a volume integral as follows: 
+\begin{align}\label{intro.arf.eq:force_in_sc_gauss}
+    -\int\bigg\langle&\left(-\rho_0(\partial_iu_{\text{in}}^{m})u_{\text{sc}}^{m} - \rho_0 (\partial_iu_{\text{sc}}^{m})u_{\text{in}}^{m} + \frac{c_0^2}{\rho_0}\partial_i\rho_{in}\rho_{sc} + \frac{c_0^2}{\rho_0}\rho_{in}\partial_i\rho_{sc}\right)\delta_{ij} + \nonumber\\
+    &\rho_0(\partial_{i}u_{\text{in}}^{i})u_{\text{sc}}^{j} + \rho_0u_{\text{in}}^{i}(\partial_{i}u_{\text{sc}}^{j}) + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j} + \rho_0u_{\text{sc}}^{i}(\partial_{i}u_{\text{in}}^{j})\bigg\rangle dV
+\end{align}
+the first two terms may be rewritten as
+\begin{align}
+    (\partial_iu_{\text{in}}^{m})u_{\text{sc}}^{m} + (\partial_iu_{\text{sc}}^{m})u_{\text{in}}^{m} &= (\partial_i\partial_m\phi_{\text{in}})u_{\text{sc}}^{m} + (\partial_i\partial_m\phi_{\text{sc}})u_{\text{in}}^{m} = \dots\nonumber\\
+    \dots=(\partial_m\partial_i\phi_{\text{in}})u_{\text{sc}}^{m} + (\partial_m\partial_i\phi_{\text{sc}})u_{\text{in}}^{m} &= (\partial_mu_{\text{in}}^{i})u_{\text{sc}}^{m} + (\partial_mu_{\text{sc}}^{i})u_{\text{in}}^{m}
+\end{align}
+such that these terms are canceled with implicitly summed terms between the velocity and the differential operator. Thus, the remaining expression would be
+\begin{equation}\label{intro.arf.eq:force_in_sc_gauss}
+    -\int\bigg\langle\frac{c_0^2}{\rho_0}\partial_j\rho_{in}\rho_{sc} + \frac{c_0^2}{\rho_0}\rho_{in}\partial_j\rho_{sc} + \rho_0(\partial_{i}u_{\text{in}}^{i})u_{\text{sc}}^{j} + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV
+\end{equation}
+Now using \eqref{intro.acoustics.eq:linear_NSE_eqs} for the incident and scattered fields,except the last term, we have
+\begin{align}\label{intro.arf.eq:force_in_sc_gauss}
+    -\int\bigg\langle-\frac{\partial u_{\text{in}}^{j}}{\partial t}\rho_{sc} - \frac{\partial u_{\text{sc}}^{j}}{\partial t}\rho_{in} -\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{sc}}^{j} + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV \nonumber\\
+    -\int\bigg\langle-\frac{\partial u_{\text{in}}^{j}}{\partial t}\rho_{sc} - \frac{\partial}{\partial t}(u_{\text{sc}}^{j}\rho_{in}) + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV 
+\end{align}
+Now using 
+\begin{equation}
+    -\frac{\partial u_{\text{in}}^{j}}{\partial t}\rho_{sc} = -\frac{\partial}{\partial t}(u_{\text{in}}^{j}\rho_{sc}) + u_{\text{in}}^{j}\frac{\partial \rho_{sc}}{\partial t}\quad,
+\end{equation}
+the following terms remain:
+\begin{equation}
+    -\int\bigg\langle-\frac{\partial}{\partial t}(u_{\text{sc}}^{j}\rho_{in} + u_{\text{in}}^{j}\rho_{sc}) + u_{\text{in}}^{j}\frac{\partial \rho_{sc}}{\partial t} + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV\quad,
+\end{equation}
+as the time-average of the time derivatives of any periodic function is identically zero, the final simplification has the following form
+\begin{equation}
+    -\int\bigg\langle u_{\text{in}}^{j}\left(\frac{\partial \rho_{sc}}{\partial t} + \rho_0(\partial_{i}u_{\text{sc}}^{i})\right)\bigg\rangle dV\quad,
+\end{equation}
+thus, it has been shown the possibility to reach an expression of the force only in terms of the scattered velocity potential field by using once again \eqref{intro.arf.eq:phi_fields}
+\begin{equation}\label{eq:F_sc}
+    \langle F_{i} \rangle = - \rho_0\int \left\langle u^{in}_i\left(\nabla^2\phi_{sc}-\frac{1}{c_0^2}\frac{\partial^2\phi_{sc}}{\partial  t^2}\right)\right\rangle dV\quad,
+\end{equation}
+where we get the wave operator applied to the scattered field. Indeed, this wave equation is not homogeneous as the scattered field comes from the interaction between the particle and he fluid. For a small sphere, the retarded time multipole expansion \eqref{intro.arf.eq:sc_multipoles} is done as an analogous case of a point particle in electrostatics. the scalar field $a$ and vector field $\vec A$ are determined in the following way. Assuming the sphere to be a compressible one such that it shrinks or expands isotropically by simply enlarging or decreasing its radius. Considering a mathematical spherical region $\Omega$ of radius $R_{\Omega}$ concentric to the sphere with radius $R_p$ which fulfills $\lambda\gg R_{\Omega}\gg R_p$, such that there is an excess of fluid around the sphere, its outgoing mass flux would be computed using the mass conservation law in its integral form: 
+\begin{equation}
+    \dot m = \frac{\partial}{\partial t}\int_{\Omega}dV \rho_0 = -\int_\Omega dV \nabla\cdot(\rho_0\vec u) = -\oint_{\partial\Omega} dS (\rho_0\vec u)\cdot\hat n\quad,
+\end{equation}
+where $\hat n$ is a vector normal to $\partial\Omega$. As its assumed that the outgoing flow has a velocity which is constant around the surface $\partial\Omega$ and parallel to $\hat n$, the only contributing term in \eqref{intro.arf.eq:sc_multipoles} is the one containing the spatially constant scalar field $a$ \cite[~p.282]{Landau}\cite[~p.70]{Manneberg2009}. Thus,
+\begin{equation}
+    \dot m = -\oint_{\partial\Omega} dS (\rho_0\nabla\phi_{\text{sc}})\cdot\hat n = a\rho_0\oint_{\partial\Omega} dS \nabla\left(\frac{1}{r}\right)\cdot\hat n\quad,
+\end{equation}
+then applying the gradient and evaluating in the spherical surface where $r=R_\Omega$ the integral is reduced to
+\begin{equation}\label{intro.arf.eq:a_surf_int}
+    \dot m = \frac{a\rho_0}{R_\Omega^2}\oint_{\partial\Omega} dS = \frac{a\rho_0}{R_\Omega^2} (4\pi R_\Omega^2) = 4\pi a\rho_0\quad.
+\end{equation}
+As this integral should be zero for the case of incompressible fluid, the only way to obtain a non-zero result from \eqref{intro.arf.eq:a_surf_int} is by considering the volume of the sphere $V_p$ to change as was affirmed previously. Then, by a change of the volume of the particle in time we have
+\begin{align}
+    4\pi a\rho_0 &= \rho_0\dot V_p \nonumber\\
+    a &= \frac{\dot V_p}{4\pi}
+\end{align}
+as we consider the fluid to be incompressible. For the compressible case, the total volume surrounded by $\Omega$ includes the volume occupied by the particle, that is $V_p$, and the volume of the fluid around the sphere. The total mass flux would be then written as a contribution of an incompressible volume volume rate $\dot{V}_{\text{incompressible}}$ due to the driven oscillation of the sphere compression and a compressible one $\dot{V}_{\text{compressible}}$ due to the ongoing incident waves. In total we have
+\begin{equation}\label{intro.arf.eq:4piarho_Vin-Vcomp}
+    4\pi a \rho_0 = \dot{V}_{\text{incompressible}} - \dot{V}_{\text{compressible}}\quad.
+\end{equation}
+The substraction is made in order to be consistent with the physical fact that if the ongoing wave produces the same amount of change in the volume than the one made by the pulsation of the sphere, then the net mass flux is zero, because the same amount of mass entering $\Omega$ would be the same that comes out when the sphere expands. But this situation will only occur if the compressibility of both the fluid and the sphere's material is the same, as will be shown later on. In the imcompressible case, as the particle keeps a constant volume the outgoing flow-rate is produced by a change of the density. Thus, the incompressible contribution would be proportional to the fraction of the change in the density
+\begin{equation}\label{intro.arf.eq:V_incomp}
+    \dot{V}_{\text{incompressible}} = \frac{V_p}{\rho_0}\dot{\rho_{\text{in}}}\quad.
+\end{equation}
+The compressible contribution will be considered as the effect of an ongoing wave passing through the sphere, which generates a small change $d p_{\text{in}}$ in the sphere related with a small change of the volume $dV_p$ in the following way:
+\begin{equation}
+    \frac{dV_p}{V_p} = \frac{1}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S dp_{\text{in}}\quad,
+\end{equation}
+where the compressibility comes to play an important role. For variations in time we shall write instead
+\begin{equation}
+     \dot{V}_{\text{compressible}} = \frac{dV_p}{dt} = \frac{V_p}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S \frac{dp_{\text{in}}}{dt}\quad,
+\end{equation}
+such that with the help of the state equation \eqref{intro.acoustics.eq:linear_p_rho} and \eqref{intro.acoustics.eq:c2_dp_drho} it is possible to finally write
+\begin{equation}\label{intro.arf.eq:V_comp}
+    \frac{dV_p}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2} \frac{d\rho_{\text{in}}}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2}\dot{\rho}_{\text{in}}\quad.
+\end{equation}
+Now, using \eqref{intro.arf.eq:V_incomp} and \eqref{intro.arf.eq:V_comp} the scalar field $a$ is obtained from \eqref{intro.arf.eq:4piarho_Vin-Vcomp} as
+\begin{equation}\label{intro.arf.eq:a_field_Vp}
+    a(t) = \frac{V_p}{4\pi\rho_0}\frac{\partial\rho_{in}}{\partial t}\left(1-\frac{\rho_0c_0^2}{\rho_pc_p^2}\right)\quad,
+\end{equation}
+or in terms of the particle's radius  
+\begin{equation}\label{intro.arf.eq:a_field_Rp}
+    a(t) = \frac{R_p^3}{3\rho_0}\frac{\partial\rho_{in}}{\partial t}\left(1-\frac{\rho_0c_0^2}{\rho_pc_p^2}\right)\quad,
+\end{equation}
+noting the proportionality with the cube of the radius. From this scalar field the non-dimensional contrast factor $f_1$ is defined in terms of the compressibility of the fluid $\kappa_0 = 1/(\rho_0c_0^2)$ and the compressibility of the particle $\kappa_p = 1/(\rho_pc_p^2)$ as
+\begin{equation}
+    f_1 = 1-\frac{\kappa_p}{\kappa_0}
+\end{equation}
+indicating that if both compressibilities match for both media, the particle and the fluid, the monopole term of \eqref{intro.arf.eq:sc_multipoles} does not contribute to the force. 
+
+The vector field $\vec A$ appearing in the second term of \eqref{intro.arf.eq:sc_multipoles} (the dipole contribution) is related to the energy and the total momentum of the fluid when the particle is moving through it, as it transfers momentum back and for when oscillatory motion is achieved. The kinetic energy carried by the fluid has the following form:
+\begin{equation}\label{intro.arf.eq:energy_int_vol}
+    E = \frac{1}{2}\int_{\Sigma} \rho_0 u^2 dV\quad,
+\end{equation}
+where $\Sigma$ is a region that covers most of the outer fluid except the volume occupied by the particle. This region will be defined as a sphere of radius $R_\Sigma$ concentric to the particle, but this radius is so large that it may cover all the fluid, letting it tend to infinite \cite[~p.27]{Landau}. Defining $\vec v$ as the particle's velocity, this identity which is not too hard to show
+\begin{equation}
+    u^2 = v^2 + (\vec u + \vec v)\cdot(\vec u - \vec v)\quad
+\end{equation}
+will be  plugged into the integrand of \eqref{intro.arf.eq:energy_int_vol} to write
+\begin{equation}
+    \int_{\Sigma} u^2 dV = \int_{\Sigma} v^2 dV + \int_{\Sigma} u^2 dV + \int_{\Sigma} (\vec u + \vec v)\cdot(\vec u - \vec v) dV\quad.
+\end{equation}
+The first term of the right-hand side is simply $v^2(V_\Sigma - V_p)$ because the velocity of the particle does not depend on the spatial coordinates. Regarding the second term, we want to transform the volume integral to a surface integral by using the Gauss theorem. In order to do this, we write first the first factor as a gradient as follows:
+\begin{equation}
+    \partial_i(\phi + v_k r_k) = (\partial_i\phi + \partial_i(v_k r_k)) = u_i + v_k\partial_i r_k = u_i + v_k\delta_{ik} = u_i + v_i\quad,
+\end{equation}
+then, the divergence of the product shall be computed, taking into account that $\partial_i u_i = 0$ due to incompressibility and $\partial_i v_i = 0$ due to spatial independence, as
+\begin{equation}
+    \partial_i[(u_i - v_i)(\phi + v_kr_k)] = (u_i - v_i)\partial_i(\phi + v_k r_k)
+\end{equation}
+implying
+\begin{equation}\label{intro.arf.eq:energy_int_surf}
+    \int_{\Sigma} u^2 dV = v^2(V_\Sigma - V_p) + \oint_{\partial\Sigma} (\phi + \vec v\cdot\vec r)(\vec u - \vec v)\cdot\hat n dS 
+\end{equation}
+where $\partial\Sigma = S + S_p$, being $S$ the outer surface of the sphere of radius $R_\Sigma$ and $S_p$ the surface area of the particle. There is as boundary condition to be fulfilled at the surface of the particle. The normal component of the fluid velocity must be equal to the normal component of the particle velocity, leading to cancel the integration over $S_p$. As we have assumed incompressibility without any change of the volume of the object, only the dipole term of \eqref{intro.arf.eq:sc_multipoles} which includes $\vec A$ will contribute to the integration. This term might be written as
+\begin{equation}\label{intro.arf.eq:phi_dipole}
+    \vec A(t) \cdot \nabla\left(\frac{1}{r}\right) = -\vec A(t) \cdot \frac{\hat r}{r^2}\quad,
+\end{equation}
+and the velocity $\vec u$ as
+\begin{equation}\label{intro.arf.eq:grad_phi_dipole}
+    \vec u = \nabla\left(\vec A \cdot \frac{\hat r}{r^2}\right) = (\vec A \cdot \nabla)\frac{\hat r}{r^2} = \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{r^3}\quad.
+\end{equation}
+such that the integrand of \eqref{intro.arf.eq:energy_int_vol} becomes, considering that both the potential and the surface $S$ are centered at the origin so $\hat n = \hat r$ and $r = R_\Sigma$ we have
+\begin{align}
+    &\oint_{S} \left(-\vec A\cdot \frac{\hat r}{R_\Sigma^2} + R_\Sigma\vec v\cdot\hat r\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) (R_\Sigma^2d\Omega) \nonumber\\
+    =&\oint_{S} \left(-\vec A\cdot\hat r + R_\Sigma^3(\vec v\cdot\hat r)\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) d\Omega\quad,
+\end{align}
+and expanding the product and neglecting the term proportional to $R_\Sigma^{-3}$ due to be so small
+\begin{align}
+    &\oint_{S} \left((\vec A\cdot\hat r)\vec v + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r)\hat r - (\vec v\cdot\hat r)\vec A - R_\Sigma^3(\vec v\cdot\hat r)\vec v\right)\cdot\hat r d\Omega\nonumber\\
+    =&\oint_{S} \left((\vec A\cdot\hat r)(\vec v\cdot\hat r) + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - (\vec v\cdot\hat r)(\vec A\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\nonumber\\
+    =&\oint_{S} \left(3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\quad.
+\end{align}
+As both $\vec A$ and $\vec v$ are constants in space, it is possible to let them out of the integration so that we end up integrating the dyadic product of the unit vectors giving one third of the identity matrix \cite[~p.28]{Landau}, leading to
+\begin{align}
+    &\oint_{S} \left(3(A_i\hat r_i)(v_k\hat r_k) - R_\Sigma^3(v_i\hat r_iv_k\hat r_k)\right)d\Omega \nonumber\\
+    =&(3A_iv_k - R_\Sigma^3 v_iv_k)\oint_{S} \hat r_i\hat r_k d\Omega \nonumber\\
+    =&(3A_iv_k - R_\Sigma^3 v_iv_k)\frac{4\pi}{3}\delta_{ij} \nonumber\\
+    =&4\pi\left((\vec A\cdot\vec v) - \frac{R_\Sigma^3}{3}v^2\right)\quad.
+\end{align}
+With this result, it is possible to write the total energy defined in \eqref{intro.arf.eq:energy_int_vol} as 
+\begin{align}
+    E &= \frac{\rho_0}{2}\left(v^2\left(\frac{4\pi R_\Sigma^3}{3} - V_p\right) + 4\pi\left(\vec A\cdot\vec v - \frac{R_\Sigma^3}{3}\right)\right)\nonumber\\
+    E &= \frac{\rho_0}{2}\left(4\pi\vec A\cdot\vec v - v^2V_p\right)\quad.\label{intro.arf.eq:energy_A}
+\end{align}
+The kinetic energy is related to the exchange of momentum between the particle and the fluid. Indeed, one expression for the energy may be defined using the symmetric induced-mass tensor $m_{ij}$, which is determined by the constant field $\vec A$ and it would be useful to find the momentum exerted by the motion of the object. The energy is then written as 
+\begin{equation}
+    E = \frac{1}{2}m_{ij}v_iv_j\quad,
+\end{equation}
+and the momentum is related to the energy considering a force $\vec F$ exerted by the object which produces a change in momentum $d\vec P$ calculated via
+\begin{equation}
+    d\vec P = \vec F dt \quad,
+\end{equation}
+multiplying by the velocity of the sphere we can see that the energy appears naturally
+\begin{equation}\label{intro.arf.eq:dP_dE}
+    \vec v\cdot d\vec P = \vec v\cdot\vec F dt = dE\quad.
+\end{equation}
+being clear that the momentum is obtained in terms of $\vec A$, by comparing \eqref{intro.arf.eq:energy_A} and \eqref{intro.arf.eq:dP_dE}, as
+\begin{equation}\label{intro.arf.eq:P_A}
+    \vec P = \rho_0\left(4\pi\vec A - V_p\vec v\right)\quad,
+\end{equation}
+and it's also obtained in terms of the induced-mass tensor as
+\begin{equation}\label{intro.arf.eq:P_mij}
+    P_i = m_{ij}v_j\quad.
+\end{equation}
+Regarding the motion of the particle itself, there are enough elements to write a motion equation for it, taking into account that the recently calculated momentum is returned back to the particle by third Newton's law and the driven force made by the fluid, for now considered as an external force $\vec f$. The motion equation is then
+\begin{equation}\label{intro.arf.eq:motion_eq_left}
+    m_p\frac{d\vec v}{dt} + \frac{d\vec P}{dt} = \vec f\quad,
+\end{equation}
+and the left-hand side may be written using \eqref{intro.arf.eq:P_mij} as
+\begin{equation}\label{intro.arf.eq:motion_eq_tensor_left}
+    (m_p\delta_{ij} + m_{ij})\frac{d v_j}{dt} = f_i\quad.
+\end{equation}
+The external force is made by the fluid to provoke an oscillatory driven motion. If the volume occupied by the particle was completely occupied by the fluid and the velocity of this body is the same as the fluid, the carried momentum would be simply $\rho_0V_p\vec u$ and the force its derivative in time, with $\vec u$ the velocity of the fluid at the position of the particle if it were not there. However, the body is going with its own speed $\vec v$ which will not always coincide with $\vec u$, thus, the total momentum requires and additional term regarding the exchange of momentum with the fluid. This term is basically \eqref{intro.arf.eq:P_mij} but the velocity in the product will be instead the relative velocity between the particle and the fluid, which is $\vec u - \vec v$. In this sense, the total momentum is computed by
+\begin{equation}\label{intro.arf.eq:motion_eq_left}
+    m_p\frac{dv_i}{dt} = \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{d}{dt}(v_j - u_j)\quad,
+\end{equation}
+simplified as
+\begin{align}
+    m_p\delta_{ij}\frac{dv_j}{dt} &= \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{dv_j}{dt} + m_{ij}\frac{du_j}{dt}\nonumber\\
+    (m_p\delta_{ij} + m_{ij})\frac{dv_j}{dt} &=(\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}\quad.\label{intro.arf.eq:complete_eq_motion}
+\end{align}
+to identify the driven force at the right-hand side of \eqref{intro.arf.eq:motion_eq_left} in the form of
+\begin{equation}
+    f_i = (\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}
+\end{equation}
+and the following relation between the velocity of the fluid and the velocity of the particle:
+\begin{equation}\label{intro.arf.eq:u_v_equation}
+    (m_p\delta_{ij} + m_{ij})v_j =(\rho_0V_p\delta_{ij} + m_{ij})u_j\quad,
+\end{equation}
+obtained after integrating \eqref{intro.arf.eq:complete_eq_motion} respect to time. This expression is essential to obtain a velocity potential which conserves the momentum during the fluid-particle interaction. One boundary condition which is left to approach, barely mentioned, is the one were the normal velocities matches
+\begin{equation}\label{intro.arf.eq:vn_un}
+    \vec u\cdot\hat r = \vec v\cdot \hat r\quad.
+\end{equation}
+In order to include this boundary condition, the expression \eqref{intro.arf.eq:grad_phi_dipole} will help on this purpose in the following way:
+\begin{align}
+    \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{R_p^3}\cdot\hat r &= \vec v\cdot \hat r\nonumber\\
+    \frac{2(\vec A\cdot\hat r)}{R_p^3} &= \vec v\cdot\hat r\nonumber\\
+    \vec A\cdot\hat r &= \frac{R_p^3}{2} (\vec v\cdot\hat r) \nonumber\\
+    \vec A &= \frac{R_p^3}{2} \vec v\quad.\label{intro.arf.eq:A_un_vn}
+\end{align}
+We could do this short calculation from the beginning, but \eqref{intro.arf.eq:A_un_vn} does not fulfills momentum conservation. Instead, it will provide information about the induced mass tensor equaling \eqref{intro.arf.eq:P_A} and \eqref{intro.arf.eq:P_mij}
+\begin{align}
+    m_{ij}v_j &= \rho_0\left(\frac{4\pi R_p^3}{2} - \frac{4\pi R_p^3}{3} \right)v_i\nonumber\\
+    m_{ij}&= \frac{2\pi\rho_0R_p^3}{3}\delta_{ij}\label{intro.arf.eq:m_ij_A}
+\end{align}
+Also, it will let us find the actual field which already satisfies momentum conservation rewritting \eqref{intro.arf.eq:u_v_equation} as
+\begin{align}
+    (m_p\delta_{ij} + m_{ij})v_j &=(\rho_0V_p\delta_{ij} + m_{ij})u_j\nonumber\\
+    \left(m_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}v_j &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}u_j\nonumber\\
+    \left(\rho_pV_p + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
+    \left(\frac{4\pi\rho_pR_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\frac{4\pi\rho_0R_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
+    \left(\rho_p + \frac{\rho_0}{2}\right)v_i &=\left(\rho_0 + \frac{\rho_0}{2}\right)u_i\nonumber\\
+    v_i &=\frac{3\rho_0}{2\rho_p + \rho_0}u_i\quad.\label{intro.arf.eq:u_v_relation}
+\end{align}
+This final relation will ensure momentum conservation for \eqref{intro.arf.eq:A_un_vn}, where equal velocities $\vec u$ and $\vec v$ were assumed. In general, the actual velocity must be the one which is relative to the fluid in order to still satisfy \eqref{intro.arf.eq:vn_un}. Thus
+\begin{equation}
+    \vec A = \frac{R_p^3}{2}(\vec v - \vec u)\quad,
+\end{equation}
+and with \eqref{intro.arf.eq:u_v_relation} the definitive expression for $\vec A$ is gotten:
+\begin{equation}\label{intro.arf.eq:A_field_Rp}
+    \vec A(t) = \frac{R_p^3}{2}\left(\frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\right)\vec u\quad,
+\end{equation}
+introducing the density contrast factor $f_2$ as
+\begin{equation}
+    f_2 = \frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\quad.
+\end{equation}
+With \eqref{intro.arf.eq:a_field_Rp} and \eqref{intro.arf.eq:A_field_Rp} it is now possible to write a particular solution for the scattered velocity potential, previously defined in terms of $a(t_{\text{ret}})$ and $\vec A(t_{\text{ret}})$, of the form
+\begin{equation}
+    \phi_{\text{sc}}(r,t) = -f_1\frac{R_p^3}{3\rho_0 r}\dot{\rho_{\text{in}}} - f_2\frac{R_p^3}{2r^2}\nabla\cdot\left(\frac{\vec u_{\text{in}}}{r}\right)\quad,
+\end{equation}
+which actually satisfies a non-homogeneous waves equation, because applying the D'Alambert operator the following source is gathered
+\begin{equation}
+    \nabla^2\phi_{\text{sc}} - \frac{1}{c_0^2}\frac{\partial^2\phi_{\text{sc}}}{\partial t^2} = f_1\frac{4\pi R_p^3}{3\rho_0}\frac{\partial\rho_{\text{in}}}{\partial t}\delta(\vec r) + f_2\frac{2\pi R_p^3}{r^2}\nabla\cdot\left(\vec u_{\text{in}}\cdot\delta(\vec r)\right)
+\end{equation}
+with $V_0$ the volume of the object, $R_0$ its radius, $\rho_0$ its density and $c_0$ the speed of sound in the material of the object. After plugging in \eqref{eq:a} and \eqref{eq:A} into \eqref{eq:F_sc}, where the source terms are Dirac's deltas, and solving the integration, we have
+\begin{equation}\label{eq:F_grad_U}
+    \langle F_i \rangle = -\partial_i V_0\left(f_1\frac{1}{2\rho c^2}\langle p'^2_{in} \rangle + \frac{3}{4}\rho f_2\langle v^2_{in} \rangle\right) = -\nabla U
+\end{equation}
+where a potential $U$ is defined as
+\begin{equation}
+    U = V_0\left(f_1\frac{1}{2\rho c^2}\langle p'^2_{in} \rangle + \frac{3}{4}\rho f_2\langle v^2_{in} \rangle\right)
+\end{equation}
+with 
+\begin{subequations}\label{eq:f1_f2}
+    \begin{equation}
+        f_1 = 1-\frac{\rho c^2}{\rho_0c_0^2}\quad,
+    \end{equation}
+    \begin{equation}
+        f_2 = \frac{2(\rho_0-\rho)}{2\rho_0+\rho}\quad,
+    \end{equation}
+\end{subequations}
+to be called the Gor'kov potential. This potential is commonly used for acoustic levitation of small objects, even regardless of the shape of the object (or dimension) as soon as $R_0 \ll \lambda$ is satisfied. In the particular case of incident stationary waves in the pressure, like
+\begin{equation}
+    p(x,t) = p_0\sin\omega t\cos kx\quad,
+\end{equation}
+taking into account \eqref{eq:time_phi} to compute the velocity and assuming that the force is done only along the x-axis, the velocity takes the form
+\begin{equation}
+    v_x(x,t) = -\frac{p_0}{c\rho}\cos\omega t\sin kx\quad,
+\end{equation}
+and plugging into the Gor'kov potential, after solving the time-average integration, this potential for standing waves becomes
+\begin{equation}
+    U = \frac{V_0p_0^2}{4\rho c^2}\left(f_1\cos^2kx+\frac{3}{2}f_2\sin^2kx\right)
+\end{equation}
+such that the force can be gathered using \eqref{eq:F_grad_U} and \eqref{eq:f1_f2} the expression for the force becomes
+\begin{equation}
+    F_x = -\frac{\pi a^3p_0^2k}{\rho c^2}\Phi(\tilde\rho,\tilde\kappa)\sin 2kx
+\end{equation}
+where $\tilde\rho = \rho_0/\rho$ , $\tilde\kappa = \kappa_0/\kappa$ and $\Phi(\tilde\rho,\tilde\kappa)$ is defined as
+\begin{equation}
+    \Phi(\tilde\rho,\tilde\kappa) = \frac{1}{3}\left(\frac{5\tilde\rho -2}{2\tilde\rho+1}-\tilde\kappa\right)
+\end{equation}
+
+\section{}
+

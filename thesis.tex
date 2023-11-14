@@ -1,0 +1,152 @@
+%% thesis.tex 2014/04/11
+%
+% Based on sample files of unknown authorship.
+%
+% The Current Maintainer of this work is Paul Vojta.
+
+\documentclass[titlepage]{ucbthesis}
+\usepackage{rotating} % provides sidewaystable and sidewaysfigure
+\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+\usepackage[backend=biber,style=chem-acs,sorting=none]{biblatex} % Bibliography
+\addbibresource{referencias.bib}
+\setcounter{tocdepth}{1} % Depth for TOC numeration
+\setcounter{secnumdepth}{1}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+\usepackage{dcolumn}
+%\usepackage{capt-of}
+\usepackage[labelfont=bf,labelsep=period]{caption}
+\graphicspath{ {.\images} }
+\usepackage{cancel}
+\usepackage[most]{tcolorbox}
+\usepackage{afterpage}
+\usepackage{multirow}
+\usepackage[flushleft]{threeparttable}
+\usepackage{ragged2e}
+%\usepackage[]{fancyhdr}
+%\fancypagestyle{resumenheader}
+%{
+%    \fancyhead[C]{Estudio computacional de ligandos quelantes de cobre coordinados por N, O y P con potencial aplicación en la enfermedad de Alzheimer}    
+%}
+% To compile this file, run "latex thesis", then "biber thesis"
+% (or "bibtex thesis", if the output from latex asks for that instead),
+% and then "latex thesis" (without the quotes in each case).
+
+% Double spacing, if you want it.  Do not use for the final copy.
+% \def\dsp{\def\baselinestretch{2.0}\large\normalsize}
+% \dsp
+
+% If the Grad. Division insists that the first paragraph of a section
+% be indented (like the others), then include this line:
+% \usepackage{indentfirst}
+
+\addtolength{\abovecaptionskip}{\baselineskip}
+
+\newtheorem{theorem}{Jibberish}
+
+\hyphenation{mar-gin-al-ia}
+\hyphenation{bra-va-do}
+
+\begin{document}
+\renewcommand{\figurename}{Fig.}
+\renewcommand{\tablename}{Chart}
+\renewcommand{\listtablename}{chart index}
+\setlength{\abovecaptionskip}{10pt}
+\setlength{\belowcaptionskip}{10pt}
+% Declarations for Front Matter
+
+\title{Simulation of rolling magnetic microswarms along acoustic virtual walls by coupling a Lattice-Boltzmann scheme and molecular dynamics}
+%\title{Simulación de rotores magnéticos moviéndose en paredes virtuales acústicas acoplando un método de Lattice-Boltzmann y dinámica molecular}
+\author{Esteban Castro \'{A}vila}
+\degreeyear{2023}
+%\degree{Magíster}
+\degree{Master in science -}
+% For a co-chair who is subordinate to the \chair listed above
+% \cochair{Professor Benedict Francis Pope}
+% For two co-chairs of equal standing (do not use \chair with this one)
+% \cochairs{Professor Richard Francis Sony}{Professor Benedict Francis Pope}
+% Previous degrees are no longer to be listed on the title page.
+% \prevdegrees{B.A. (University of Northern South Dakota at Hoople) 1978 \\
+%   M.S. (Ed's School of Quantum Mechanics and Muffler Repair) 1989}
+\field{Physics}
+%\field{Ciencias, Química}
+% Designated Emphasis -- this is optional, and rare
+% \emphasis{Colloidal Telemetry}
+% This is optional, and rare
+% \jointinstitution{University of Western Maryland}
+% This is optional (default is Berkeley)
+% \campus{Berkeley}
+
+% For a masters thesis, replace the above \documentclass line with
+% \documentclass[masters]{ucbthesis}
+% This affects the title and approval pages, which by default calls this
+% document a "dissertation", not a "thesis".
+
+\maketitle
+\makesubtitle
+
+% Delete (or comment out) the \approvalpage line for the final version.
+%\approvalpage
+%\copyrightpage
+
+\begin{frontmatter}
+
+\begin{dedication}
+\begin{flushright}
+\begin{vplace}
+\textit{To my family.}
+\vspace{3cm}
+\textit{``The imagination of nature is far,\\
+far greater than the imagination of man."}
+\vspace{0.1cm}
+\textit{-Richard P. Feynman}
+\end{vplace}
+\end{flushright}
+\end{dedication}
+
+% You can delete the \clearpage lines if you don't want these to start on
+% separate pages.
+
+\include{agradecimientos}
+
+\include{resumen}
+
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+
+\end{frontmatter}
+
+\pagestyle{headings}
+
+%%%%%%%%%  Cuerpo del documento  %%%%%%%%%
+\part{Introduction}
+\include{chap1}
+\include{chap2}
+
+%\part{Teoría del Funcional de la Densidad}
+\include{chap3}
+\include{chap4}
+
+%\part{ Proyecto de investigación}
+\include{chap5}
+\include{chap6}
+\include{chap7}
+%\include{chap7_resultados_Pincer.tex}
+%\include{chap7_resultados_Salen.tex}
+
+\include{conclusion}
+
+\printbibliography
+
+%\appendix
+%\include{ap2}
+%\include{ap1}
+
+\end{document}
