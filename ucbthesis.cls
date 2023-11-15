@@ -412,7 +412,7 @@
 
   \begin{center}
     \fmfont
-    \huge\textbf{\@title\par}\normalsize\normalfont
+    \huge\textbf{\@title}\par\normalsize\normalfont
     \vspace{2.0cm}
     
     \Large\textbf{\@author}\par\normalsize\normalfont
@@ -455,7 +455,7 @@
 
   \begin{center}
     \fmfont
-    \huge\textbf{\@title\par}\normalsize\normalfont
+    \huge\textbf{\@title}\par\normalsize\normalfont
     \vspace{2.0cm}
     
     \Large\textbf{\@author}\par\normalsize\normalfont
