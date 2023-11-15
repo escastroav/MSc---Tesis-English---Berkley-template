@@ -171,7 +171,7 @@ being $\gamma$ the adiabatic constant defined as the quotient between the heat c
     B_{\text{ad}} &= -\gamma P\label{intro.acoustics.eq:ad_bulk}
 \end{align}
 and with \ref{intro.acoustics.eq:ideal_gas} the adiabatic sound speed $c_{\text{ad}}$ is gotten as
-\begin{equation}\label{intro.acoustics.eq:iso_sound_speed}
+\begin{equation}\label{intro.acoustics.eq:ad_sound_speed}
     c_{\text{ad}} = \sqrt{\frac{\gamma k_B T}{m_\text{mol}}}\quad.
 \end{equation}
 This last expression gives a value close to 347 m/s at a temperature of 300 K, which agrees enough to the measured value. If we want to obtain a closer value, dissipation of sound due to viscosity must be under consideration. As soon as temperature does not develop larger changes than its value, just as pressure or density, there is no loss of generality if this value is kept as a constant, in consequence, the Bulk modulus will be the average steady pressure $p_0$ for the isothermic case and $\gamma p_0$ for the adiabatic case. However the speed of sound may depend of elastic stiffness as we see in \ref{intro.acoustics.eq:sound_speed_bulk}, where the Bulk's modulus is mainly dependent on the average of density and temperature. As in both cases the gas was considered ideal there will be a linear relationship between the pressure and the density of the gas by rewriting \ref{intro.acoustics.eq:ideal_gas} as
@@ -368,11 +368,11 @@ the first two terms may be rewritten as
     \dots=(\partial_m\partial_i\phi_{\text{in}})u_{\text{sc}}^{m} + (\partial_m\partial_i\phi_{\text{sc}})u_{\text{in}}^{m} &= (\partial_mu_{\text{in}}^{i})u_{\text{sc}}^{m} + (\partial_mu_{\text{sc}}^{i})u_{\text{in}}^{m}
 \end{align}
 such that these terms are canceled with implicitly summed terms between the velocity and the differential operator. Thus, the remaining expression would be
-\begin{equation}\label{intro.arf.eq:force_in_sc_gauss}
+\begin{equation}
     -\int\bigg\langle\frac{c_0^2}{\rho_0}\partial_j\rho_{in}\rho_{sc} + \frac{c_0^2}{\rho_0}\rho_{in}\partial_j\rho_{sc} + \rho_0(\partial_{i}u_{\text{in}}^{i})u_{\text{sc}}^{j} + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV
 \end{equation}
 Now using \eqref{intro.acoustics.eq:linear_NSE_eqs} for the incident and scattered fields,except the last term, we have
-\begin{align}\label{intro.arf.eq:force_in_sc_gauss}
+\begin{align}
     -\int\bigg\langle-\frac{\partial u_{\text{in}}^{j}}{\partial t}\rho_{sc} - \frac{\partial u_{\text{sc}}^{j}}{\partial t}\rho_{in} -\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{sc}}^{j} + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV \nonumber\\
     -\int\bigg\langle-\frac{\partial u_{\text{in}}^{j}}{\partial t}\rho_{sc} - \frac{\partial}{\partial t}(u_{\text{sc}}^{j}\rho_{in}) + \rho_0(\partial_{i}u_{\text{sc}}^{i})u_{\text{in}}^{j}\bigg\rangle dV 
 \end{align}
@@ -389,8 +389,8 @@ as the time-average of the time derivatives of any periodic function is identica
     -\int\bigg\langle u_{\text{in}}^{j}\left(\frac{\partial \rho_{sc}}{\partial t} + \rho_0(\partial_{i}u_{\text{sc}}^{i})\right)\bigg\rangle dV\quad,
 \end{equation}
 thus, it has been shown the possibility to reach an expression of the force only in terms of the scattered velocity potential field by using once again \eqref{intro.arf.eq:phi_fields}
-\begin{equation}\label{eq:F_sc}
-    \langle F_{i} \rangle = - \rho_0\int \left\langle u^{in}_i\left(\nabla^2\phi_{sc}-\frac{1}{c_0^2}\frac{\partial^2\phi_{sc}}{\partial  t^2}\right)\right\rangle dV\quad,
+\begin{equation}\label{intro.arf.eq:F_sc}
+    \langle F_{i} \rangle = - \rho_0\int \left\langle u_{\text{in}}^i\left(\nabla^2\phi_{sc}-\frac{1}{c_0^2}\frac{\partial^2\phi_{sc}}{\partial  t^2}\right)\right\rangle dV\quad,
 \end{equation}
 where we get the wave operator applied to the scattered field. Indeed, this wave equation is not homogeneous as the scattered field comes from the interaction between the particle and he fluid. For a small sphere, the retarded time multipole expansion \eqref{intro.arf.eq:sc_multipoles} is done as an analogous case of a point particle in electrostatics. the scalar field $a$ and vector field $\vec A$ are determined in the following way. Assuming the sphere to be a compressible one such that it shrinks or expands isotropically by simply enlarging or decreasing its radius. Considering a mathematical spherical region $\Omega$ of radius $R_{\Omega}$ concentric to the sphere with radius $R_p$ which fulfills $\lambda\gg R_{\Omega}\gg R_p$, such that there is an excess of fluid around the sphere, its outgoing mass flux would be computed using the mass conservation law in its integral form: 
 \begin{equation}
@@ -438,7 +438,7 @@ or in terms of the particle's radius
     a(t) = \frac{R_p^3}{3\rho_0}\frac{\partial\rho_{in}}{\partial t}\left(1-\frac{\rho_0c_0^2}{\rho_pc_p^2}\right)\quad,
 \end{equation}
 noting the proportionality with the cube of the radius. From this scalar field the non-dimensional contrast factor $f_1$ is defined in terms of the compressibility of the fluid $\kappa_0 = 1/(\rho_0c_0^2)$ and the compressibility of the particle $\kappa_p = 1/(\rho_pc_p^2)$ as
-\begin{equation}
+\begin{equation}\label{intro.arf.eq:f1}
     f_1 = 1-\frac{\kappa_p}{\kappa_0}
 \end{equation}
 indicating that if both compressibilities match for both media, the particle and the fluid, the monopole term of \eqref{intro.arf.eq:sc_multipoles} does not contribute to the force. 
@@ -527,7 +527,7 @@ and the left-hand side may be written using \eqref{intro.arf.eq:P_mij} as
     (m_p\delta_{ij} + m_{ij})\frac{d v_j}{dt} = f_i\quad.
 \end{equation}
 The external force is made by the fluid to provoke an oscillatory driven motion. If the volume occupied by the particle was completely occupied by the fluid and the velocity of this body is the same as the fluid, the carried momentum would be simply $\rho_0V_p\vec u$ and the force its derivative in time, with $\vec u$ the velocity of the fluid at the position of the particle if it were not there. However, the body is going with its own speed $\vec v$ which will not always coincide with $\vec u$, thus, the total momentum requires and additional term regarding the exchange of momentum with the fluid. This term is basically \eqref{intro.arf.eq:P_mij} but the velocity in the product will be instead the relative velocity between the particle and the fluid, which is $\vec u - \vec v$. In this sense, the total momentum is computed by
-\begin{equation}\label{intro.arf.eq:motion_eq_left}
+\begin{equation}\label{intro.arf.eq:motion_eq_fluid}
     m_p\frac{dv_i}{dt} = \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{d}{dt}(v_j - u_j)\quad,
 \end{equation}
 simplified as
@@ -577,47 +577,56 @@ and with \eqref{intro.arf.eq:u_v_relation} the definitive expression for $\vec A
     \vec A(t) = \frac{R_p^3}{2}\left(\frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\right)\vec u\quad,
 \end{equation}
 introducing the density contrast factor $f_2$ as
-\begin{equation}
+\begin{equation}\label{intro.arf.eq:f2}
     f_2 = \frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\quad.
 \end{equation}
 With \eqref{intro.arf.eq:a_field_Rp} and \eqref{intro.arf.eq:A_field_Rp} it is now possible to write a particular solution for the scattered velocity potential, previously defined in terms of $a(t_{\text{ret}})$ and $\vec A(t_{\text{ret}})$, of the form
 \begin{equation}
     \phi_{\text{sc}}(r,t) = -f_1\frac{R_p^3}{3\rho_0 r}\dot{\rho_{\text{in}}} - f_2\frac{R_p^3}{2r^2}\nabla\cdot\left(\frac{\vec u_{\text{in}}}{r}\right)\quad,
 \end{equation}
-which actually satisfies a non-homogeneous waves equation, because applying the D'Alambert operator the following source is gathered
-\begin{equation}
-    \nabla^2\phi_{\text{sc}} - \frac{1}{c_0^2}\frac{\partial^2\phi_{\text{sc}}}{\partial t^2} = f_1\frac{4\pi R_p^3}{3\rho_0}\frac{\partial\rho_{\text{in}}}{\partial t}\delta(\vec r) + f_2\frac{2\pi R_p^3}{r^2}\nabla\cdot\left(\vec u_{\text{in}}\cdot\delta(\vec r)\right)
+which actually satisfies a non-homogeneous waves equation, because applying the D'Alembert operator, as it is done in \eqref{intro.arf.eq:F_sc}, the following source is gathered
+\begin{equation}\label{intro.arf.eq:source_sc}
+    \nabla^2\phi_{\text{sc}} - \frac{1}{c_0^2}\frac{\partial^2\phi_{\text{sc}}}{\partial t^2} = f_1\frac{V_p}{\rho_0}\frac{\partial\rho_{\text{in}}}{\partial t}\delta(\vec r) + f_2\frac{3V_p}{2}\nabla\cdot\left(\vec u_{\text{in}}\delta(\vec r)\right)
 \end{equation}
-with $V_0$ the volume of the object, $R_0$ its radius, $\rho_0$ its density and $c_0$ the speed of sound in the material of the object. After plugging in \eqref{eq:a} and \eqref{eq:A} into \eqref{eq:F_sc}, where the source terms are Dirac's deltas, and solving the integration, we have
-\begin{equation}\label{eq:F_grad_U}
-    \langle F_i \rangle = -\partial_i V_0\left(f_1\frac{1}{2\rho c^2}\langle p'^2_{in} \rangle + \frac{3}{4}\rho f_2\langle v^2_{in} \rangle\right) = -\nabla U
+Considering the fact that the incident fields are harmonical as well as $\phi_{\text{in}}$ if we look the incident velocity as its gradient. After plugging in \eqref{intro.arf.eq:source_sc} into \eqref{intro.arf.eq:F_sc}, and solving the integration, we have
+\begin{align}
+    \langle F_i \rangle &= -\rho_0\int\left\langle f_1\frac{V_p}{\rho_0}\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{in}}^i\delta(\vec r) + f_2\frac{3V_p}{2}u_{\text{in}}^i\partial_k(u_{\text{in}}^k\delta(\vec r))\right\rangle dV \nonumber\\
+    &= -f_1V_p\int\left\langle\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{in}}^i\delta(\vec r)\right\rangle dV - f_2\frac{3\rho_0V_p}{2}\int \left\langle u_{\text{in}}^i\partial_k(u_{\text{in}}^k\delta(\vec r))\right\rangle dV \nonumber\\
+    &= -f_1V_p\left\langle\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{in}}^i\right\rangle - f_2\frac{3\rho_0V_p}{2}\left( \oint \left\langle u_{\text{in}}^iu_{\text{in}}^k\delta(\vec r)\right\rangle dS_k - \int \left\langle (u_{\text{in}}^k\partial_k)u_{\text{in}}^i\delta(\vec r)\right\rangle dV \right)\text{ .}\label{intro.arf.eq:integrate_F_i}
+\end{align}
+As the Dirac's delta of the second term of does not contain the surface, the whole integrand is identically zero, leading to
+\begin{equation}\label{intro.arf.eq:F_after_int}
+    \langle F_i \rangle = -f_1V_p\left\langle\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{in}}^i\right\rangle + f_2\frac{3\rho_0V_p}{2}\left\langle(u_{\text{in}}^k\partial_k)u_{\text{in}}^i\right\rangle\quad.
+\end{equation}
+As a final step we can exchange the time derivative in the first term because the derivative of the whole product is identically zero, thus
+\begin{equation}
+    \left\langle\frac{\partial\rho_{\text{in}}}{\partial t}u_{\text{in}}^i\right\rangle = -\left\langle\rho_{\text{in}}\frac{\partial u_{\text{in}}^i}{\partial t}\right\rangle =  \left\langle\rho_{\text{in}}\frac{\partial_i\rho_{\text{in}}}{\rho_0c_0^2}\right\rangle = \frac{1}{2\rho_0 c_o^2}\left\langle\partial_ip_{\text{in}}^2\right\rangle\quad,
+\end{equation}
+after \eqref{intro.acoustics.eq:linear_NSE_eqs} was considered and using \eqref{intro.arf.eq:double_dev_property_simp} in the second term of \eqref{intro.arf.eq:F_after_int} the Gor'kov Force in its definitive expression is gotten as
+\begin{equation}\label{intro.arf.eq:F_grad_U}
+    \langle F_i \rangle = -\partial_i V_p\left(f_1\frac{1}{2\rho_0 c_0^2}\langle p_{\text{in}}^2 \rangle - f_2\frac{3\rho_0}{4} \langle u_{\text{in}}^2 \rangle\right) = -\nabla U
 \end{equation}
 where a potential $U$ is defined as
-\begin{equation}
-    U = V_0\left(f_1\frac{1}{2\rho c^2}\langle p'^2_{in} \rangle + \frac{3}{4}\rho f_2\langle v^2_{in} \rangle\right)
+\begin{equation}\label{intro.arf.eq:Gorkov_potential_U_f1f2}
+    U = V_p\left(f_1\frac{1}{2\rho_0 c_0^2}\langle p_{\text{in}}^2 \rangle - f_2\frac{3\rho_0}{4} \langle u_{\text{in}}^2 \rangle\right)\quad,
 \end{equation}
-with 
-\begin{subequations}\label{eq:f1_f2}
-    \begin{equation}
-        f_1 = 1-\frac{\rho c^2}{\rho_0c_0^2}\quad,
-    \end{equation}
-    \begin{equation}
-        f_2 = \frac{2(\rho_0-\rho)}{2\rho_0+\rho}\quad,
-    \end{equation}
-\end{subequations}
-to be called the Gor'kov potential. This potential is commonly used for acoustic levitation of small objects, even regardless of the shape of the object (or dimension) as soon as $R_0 \ll \lambda$ is satisfied. In the particular case of incident stationary waves in the pressure, like
-\begin{equation}
-    p(x,t) = p_0\sin\omega t\cos kx\quad,
+or after using \eqref{intro.arf.eq:f1} and \eqref{intro.arf.eq:f2}
+\begin{equation}\label{intro.arf.eq:Gorkov_potential_U_kappa_rho}
+    U = V_p\left(\left(\kappa_0-\kappa_p\right)\frac{\langle p_{\text{in}}^2 \rangle}{2} - \left(\frac{\rho_p - \rho_0}{2\rho_p + \rho_0}\right)\frac{3\rho_0\langle u_{\text{in}}^2 \rangle}{2}\right)\quad,
 \end{equation}
-taking into account \eqref{eq:time_phi} to compute the velocity and assuming that the force is done only along the x-axis, the velocity takes the form
+to be called the Gor'kov potential. This potential is commonly used for acoustic levitation of small objects, even regardless of the shape of the object (or dimension) as soon as \eqref{intro.arf.eq:R_ll_lambda} is satisfied. In the particular case of incident stationary waves in the pressure, like
 \begin{equation}
-    v_x(x,t) = -\frac{p_0}{c\rho}\cos\omega t\sin kx\quad,
+    p_{\text{in}}(x,t) = p_0\sin\omega t\cos kx\quad,
 \end{equation}
-and plugging into the Gor'kov potential, after solving the time-average integration, this potential for standing waves becomes
+taking into account \eqref{intro.acoustics.eq:linear_momentum_conservation_law} to compute the velocity and assuming that the force is done only along the x-axis, the velocity takes the form
 \begin{equation}
-    U = \frac{V_0p_0^2}{4\rho c^2}\left(f_1\cos^2kx+\frac{3}{2}f_2\sin^2kx\right)
+    v_{\text{in}}^x(x,t) = -\frac{p_0}{c_0\rho_0}\cos\omega t\sin kx\quad,
 \end{equation}
-such that the force can be gathered using \eqref{eq:F_grad_U} and \eqref{eq:f1_f2} the expression for the force becomes
+and plugging into the Gor'kov potential and solving the time-average integration, this potential for standing waves becomes
+\begin{equation}
+    U = \frac{V_pp_0^2}{4\rho_0 c_0^2}\left(f_1\cos^2kx+\frac{3}{2}f_2\sin^2kx\right)
+\end{equation}
+such that the force can be gathered using \eqref{intro.arf.eq:F_grad_U}, \eqref{intro.arf.eq:f1} and \eqref{intro.arf.eq:f2} the expression for the force becomes
 \begin{equation}
     F_x = -\frac{\pi a^3p_0^2k}{\rho c^2}\Phi(\tilde\rho,\tilde\kappa)\sin 2kx
 \end{equation}
