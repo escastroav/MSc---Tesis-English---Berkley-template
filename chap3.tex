@@ -1,5 +1,9 @@
 \chapter{A Lattice-Boltzmann model for acoustics}
 
+\section{What is a Lattice-Boltzmann method?}
+
+A Lattice-Boltzmann Method (or LBM) is a numerical approach to solve a discrete version of the transport Boltzmann equation. This numerical method is basically a cellular automata which evolves a set of population distribution functions representing the probability to find a particle at some position with a given velocity in an instant of time, such that from these distribution functions one can obtain the temporal evolution of macroscopic moments which behave under certain conservation laws, then the LBM solves the partial differential equations (PDE) for the moments, being an alternative to more used numerical methods as finite differences or finite elements, which can solve these PDE's in the time domain. The main advantages of LBM are two: one, that the solution of the transport Boltzmann equation is made over a discrete space of positions and a discrete set of velocities by developing a quadrature, avoiding to integrate over a continuous velocity space, and two, the fact that the temporal evolution for all distribution functions is independent of the neighbor cells, making this method much easier to paralellize. This method solves a density probability function for a system of microscopic particles from which macroscopic quantities are gotten, thus, LBM is considered a mesoscopic method because it simulates a hypothetical fluid transporting ideal particles between discrete cells colliding themselves in order to combine the information under a evolution rule for the cellular automata. These rules are based on the kinetic theory of gases and will be explained further.   
+
 Given an ideal particle system described by a number density function $f(\vec x, \vec v_i, t)$ defined as the probability to find a particle at the position $\vec x$ with a given velocity $\vec v_i$ at the instant of time $t$, the Lattice-Boltzmann equation as a discretized form of the Boltzmann transport equation is written, in general, as follows
 \begin{equation}\label{eq:LBE}
     f_i(\vec x + \vec v_i \delta t, t + \delta t) = f_i(\vec x, t) + \Omega_i(\vec x, t)    
@@ -32,20 +36,17 @@ This distribution function \textbf{is relaxed to the one at equilibrium} such th
 The definition of these moments will be covered later, the equilibrium distribution function must be chosen such that summing over $i$ multiplied by the corresponding order of $\vec v_i$ the desired moments are gotten.
 
 As the space and time are discretized, the velocities set $\{\vec v_i\}$ are discretized as well in a defined set in general defined as D$d$Q$q$ where $d$ is the dimension of the lattice and $q$ is the amount of vectors existing per cell. Some examples are D3Q19 or D2Q9. 
-% \begin{columns}[c]
-% \column{.5\textwidth}
-% \begin{figure}
-% \centering
-% \includegraphics[width=.5\textwidth]{D2Q9.png}
-% \caption{\small D2Q9 lattice set.}
-% \end{figure}
-% \column{.5\textwidth}
-% \begin{figure}
-% \centering
-% \includegraphics[width=0.6\textwidth]{D3Q19.png}
-% \caption{\small D3Q19 lattice set.}
-% \end{figure}
-% \end{columns}
+\begin{figure}
+\centering
+\includegraphics[width=.25\textwidth]{images/LB/D2Q9.png}
+\caption{\small D2Q9 lattice set.}
+\end{figure}
+ 
+\begin{figure}
+\centering
+\includegraphics[width=0.26\textwidth]{images/LB/D3Q19.png}
+\caption{\small D3Q19 lattice set.}
+\end{figure}
 
 For each velocities set there is a set of weights constants $\{\omega_i\}$ associated for each velocity, so that now we define a set of velocities and weights $\{\vec v_i,\omega_i\}$ which satisfies the following conditions:
 \begin{subequations}\label{eqs:sums_vw}
@@ -244,69 +245,8 @@ thus, the constant $c_s^2$ appearing in \ref{eqs:sums_vw} matches with the $c_s^
     f_i^{\text{eq}} = \omega_i\rho\left(1 + \frac{v_{i\alpha}u_\alpha}{c_s^2} + \frac{v_{i\alpha}v_{i\beta}u_\alpha u_\beta}{2c_s^4} - \frac{u_\alpha u_\beta}{2c_s^2}\right)
 \end{equation}
 
-The NSE equation describes the dynamics of a fluid in terms of its density, velocity and pressure. However the sound is propagated through \textit{small} oscillating compression of the gas that leads to acoustics. As the effect of compressibility we shall develop a perturbative expansion the density, pressure and velocity as follows
-\begin{subequations}\label{eqs:expanding_p_rho_u}
-\begin{equation}\label{eq:expand_rho}
-    \rho = \rho_0 + \rho_1
-\end{equation}
-\begin{equation}\label{eq:expand_p}
-    p = p_0 + p_1
-\end{equation}
-\begin{equation}\label{eq:expand_u}
-    u_\alpha = 0 + u_{\alpha1}
-\end{equation}
-\end{subequations}
-where $\rho_0$ and $p_0$ are steady values that don't change in space and time, while $\rho_1$ and $p_1$ would vary around these steady values. Replacing \ref{eqs:expanding_p_rho_u} into continuity equation written in \ref{eq:continuity_rho_u} and the NSE equation for $\tau=\delta t/2$ we have
-\begin{subequations}\label{eqs:cont_euler_waves_nonlinear}
-\begin{equation}\label{eq:continuity_nonlinear}
-    \partial_t\rho_1 + \partial_\alpha(\rho_0 u_{\alpha1}) + \partial_\alpha(\rho_1 u_{\alpha1}) = 0
-\end{equation}
-\begin{equation}\label{eq:euler_nonlinear}
-    \partial_\beta(\rho u_{\alpha1}u_{\beta1}) + \partial_t(\rho_0 u_{\alpha1}) + \partial_t(\rho_1u_{\alpha1}) = -\partial_\alpha p_1 
-\end{equation}
-\end{subequations}
-
-There are non-linear terms in \ref{eqs:cont_euler_waves_nonlinear} written as a product of two first order terms contributions, leading to a contribution to second order which may be neglected, thus, eqn \ref{eqs:cont_euler_waves_nonlinear} becomes
-\begin{subequations}\label{eqs:cont_euler_waves}
-\begin{equation}\label{eq:continuity_linear}
-    \partial_t\rho_1 + \partial_\alpha(\rho_0u_{\alpha1}) = 0
-\end{equation}
-\begin{equation}\label{eq:euler_linear}
-    \partial_t(\rho_0u_{\alpha1}) = -\partial_\alpha p_1 
-\end{equation}
-\end{subequations}
-and if we consider once again the equation of state for $p_1 = c_s^2\rho_1$ \textbf{assuming a constant $c_s$} and we combine \ref{eqs:cont_euler_waves} we obtain the waves equation for the density
-\begin{align}
-    \partial_t\rho_0u_{\alpha1} &= -\partial_\alpha\left(c_s^2\rho_1\right) \nonumber\\
-    \partial_\alpha\partial_t\rho_0u_{\alpha1} &= -\partial_\alpha\partial_\alpha\left(c_s^2\rho_1\right) \nonumber\\
-    \partial_t\left(\partial_\alpha\rho_0u_{\alpha1}\right) &= -c_s^2\partial_\alpha^2\rho_1 \nonumber\\
-    \partial_t\left(-\partial_t\rho_1\right) &= -c_s^2\partial_\alpha^2\rho_1 \nonumber\\
-    \partial_t^2\rho_1 &= c_s^2\partial_\alpha^2\rho_1\label{eq:proc_waves_rho}
-\end{align}
-
-The same waves equation holds for the pressure $p_1$ as it scales linearly with $\rho_1$. Rewriting \ref{eqs:cont_euler_waves} in terms of pressure we have
-\begin{subequations}\label{eqs:cont_euler_waves}
-\begin{equation}\label{eq:continuity_linear}
-    \partial_t\left(\frac{p_1}{c_s^2}\right) + \partial_\alpha(\rho_0u_{\alpha1}) = 0
-\end{equation}
-\begin{equation}\label{eq:euler_linear}
-    \partial_t(\rho_0u_{\alpha1}) = -\partial_\alpha p_1 
-\end{equation}
-\end{subequations}
-such that 
-\begin{align}
-    \partial_\alpha\partial_t\rho_0u_{\alpha1} &= -\partial_\alpha\partial_\alpha p_1 \nonumber\\
-    \partial_t\left(-\partial_t\left(\frac{p_1}{c_s^2}\right)\right) &= -\partial_\alpha^2 p_1 \nonumber\\
-    \partial_t^2 p_1 &= c_s^2\partial_\alpha^2 p_1\label{eq:proc_waves_p}
-\end{align}
-
+\section{Chopard's original model}
 The proposal of B. Chopard, P.O. Luthi and J. Wagen comes from a two-dimensional cellular automata composed by particles moving around a cartesian Lattice grid. To summarize the evolution rule we have a black particle connected to four white neighbour particles. 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.7\textwidth]{Chopard_2D_cellular_automata.png}
-%     \caption{Cellular automata scheme for 2D waves propagation.}
-%     \label{fig:chopard_2D_waves_cellular_automata}
-% \end{figure}
 
 If the position of the black particle is $\vec r_{i,j} = (x_{i,j},y_{i,j})$ and the position of each white neighbor particle is $\vec r_{i-1,j}$, $\vec r_{i+1,j}$, $\vec r_{i,j-1}$ and $\vec r_{i,j+1}$ the distances between the black particle and the white ones are
 \begin{subequations}\label{eq:f_i_chopard}
@@ -370,6 +310,12 @@ defining the matrix
     \end{pmatrix}
 \end{equation}
 Chopard have shown that with this cellular automata is possible to simulate waves propagation in two dimensions. Then he shows how to obtain a similar evolution rule using the Lattice-Boltzmann equation \ref{eq:LBE_BGK}. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/LB/Chopard_2D_cellular_automata.png}
+    \caption{Cellular automata scheme for 2D waves propagation.}
+    \label{fig:chopard_2D_waves_cellular_automata}
+\end{figure}
 
 In order to reproduce the evolution rule written in \ref{eq:evolution_rule_waves} using \ref{eq:LBE_BGK} we define the following macroscopic variables:
 \begin{equation}\label{eq:chopard_fields}
@@ -482,12 +428,12 @@ The waves equation is easily obtained using a similar procedure as in \ref{eq:pr
     \partial_t^2\Psi = 2av^2\nabla^2\Psi
 \end{equation}
 where the propagation speed is identified as $c\equiv v\sqrt{2a}$ which depends on the free parameter $a$. This lets to adjust the speed making possible to model various refraction indexes and describing inhomogeneous media. 
-% \begin{figure}
-%     \centering
-%     \includegraphics[width=0.4\textwidth]{lens_LB_chopard.png}
-%     %\caption{Caption}
-%     \label{fig:lens}
-% \end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/LB/lens_LB_chopard.png}
+    %\caption{Caption}
+    \label{fig:lens}
+\end{figure}
 The Chopard's model solves the waves equation for a \textbf{generic scalar field} $\Psi$ with the help of an \textbf{auxiliary generic vector field} $\vec J$ regardless their physical meaning. \textit{However, if we want to adjust the speed we need to be careful of possible dependencies of $c$ in any of the fields.} 
 
 As we have neglected the non-linear term $\rho u_{\alpha1}u_{\beta1}$ the momentum flux density tensor $\Pi_{\alpha\beta}$ has become the \textbf{diagonal} tensor

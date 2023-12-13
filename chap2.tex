@@ -226,11 +226,24 @@ and using \ref{intro.acoustics.eq:linear_mass_conservation} the waves equation i
 where \ref{intro.acoustics.eq:linear_p_rho} was used. The reader would notice that the density also fulfills the waves equation as it increases linearly with the pressure. With this final remark the acoustic waves phenomena was detailed explained in two approaches: As the propagation of linear deformation of newtonian and isotropic fluid and linearizing the Navier-Stokes equations from a Taylor expansion over pressure up to first order. Both paths are equivalent in the sense that both rely on small adiabatic compressions and expansions of the medium and only linear relations between the deformation and the stress were assumed. However, if one wants to calculate the hydrodynamic force over an object immersed in the fluid, experimental observations such as acoustic radiation force are not visible if we keep at first order approximations, as done in this section, because those effects are only visible and measurable as quantities averaged in time and any field with harmonic dependence will have a null average over time. In order to explain these effects, it is necessary to develop an expansion for the fields at least to second order \cite[sec.~III]{Bruus2012_02}. This will be fully explained in the next section. 
 
 \section{A general expression of the Acoustic Radiation Force}\label{intro.sec:arf}
-As it was discussed in section \ref{intro.sec:fluids},particularly in equation \ref{intro.fluids.eq:Force_surface_tensor}, the force can be expressed as the integration of the \textit{flux of momentum tensor} through a surface enclosing the particle. Any particle or small body immersed, in a fluid with the presence of a standing acoustic pressure, fields will experience a time-averaged force once the acoustic field have reached a steady state. This kind of force is known as the \textit{acoustic radiation force} and it is responsible for displacing the particle towards the node (or anti-node) if its size is much smaller than the wavelength. In section \ref{intro.sec:acoustics} it was shown how linear waves equation is obtained by considering a first order approximation for acoustic fields in continuity and Euler equations, however, if we try to determine the acoustic radiation force via \ref{intro.fluids.eq:Force_surface_tensor} and neglecting the second term of \ref{intro.fluids.eq:flux_momentum_tensor} for being second term, we would get
+As it was discussed in section \ref{intro.sec:fluids},particularly in equation \ref{intro.fluids.eq:Force_surface_tensor}, the force can be expressed as the integration of the \textit{flux of momentum tensor} through a surface enclosing the particle. Any particle or small body immersed in a fluid with the presence of a standing acoustic pressure fields will experience a time-averaged force once the acoustic field have reached a steady state. This kind of force is known as the \textit{acoustic radiation force} and it is responsible for displacing the particle towards the node (or anti-node) if its size is much smaller than the wavelength. In section \ref{intro.sec:acoustics} it was shown how linear waves equation is obtained by considering a first order approximation for acoustic fields in continuity and Euler equations, however, if we try to determine the acoustic radiation force via \ref{intro.fluids.eq:Force_surface_tensor} and neglecting the second term of \ref{intro.fluids.eq:flux_momentum_tensor} for being second term, we would get
 \begin{equation}\label{intro.arf.eq:Force_pressure}
-    \vec F = -\oint_{\partial V_p} p_1(\vec r,t) \hat n dS \quad, 
+    \vec F(t) = -\oint_{\partial V_p} p_1(\vec r,t) \hat n dS \quad, 
 \end{equation}
-being dependent only on harmonic pressure, meaning that there would have no effect in the time-averaged motion of the particle, as any harmonic field have a null time-average despite it is predominant respect to higher orders. As the linear contribution is not enough, it is necessary to develop a perturbative expansion for the pressure up to second order, such that the calculated force include non-linear terms that will eventually remain in the time-averaged force. This development will be shown in the current section. First ideal flow is considered and the second-order perturbative expansion is developed. Then, the second order contributions will be expressed in terms of the first order contributions, which satisfy waves equation, such that the necessity to solve non-linear equations as \ref{intro.fluids.eq:mass_conservation} and \ref{intro.fluids.eq:euler_equation} will be avoided. After this evaluation, the waves equation shall be solved, using the proper boundary conditions at the particle surface, in order to compute the radiation acoustic force due to the pressure and velocity field scattered by the particle, in terms of the known incident fields.
+being dependent only on harmonic pressure, meaning that there would have no effect in the time-averaged motion of the particle defined as
+\begin{equation}\label{intro.arf.eq:time-average}
+    \langle \vec F(t) \rangle = \frac{1}{T}\int_0^T \vec F(t) dt
+\end{equation}
+, as any harmonic field have a null time-average despite it is predominant respect to higher orders. From \eqref{intro.arf.eq:time-average}, if $\vec F(t)$ is a harmonic function, proportional to $\sin\omega t$ or $\cos\omega t$ with $\omega=2\pi/T$, then it is possible to show that
+\begin{subequations}
+\begin{equation}\label{intro.arf.eq:average_zero}
+    \langle\sin\omega t\rangle = \langle\cos\omega t\rangle = 0\quad,
+\end{equation}
+\begin{equation}\label{intro.arf.eq:average_sq_half}
+    \langle\sin^2\omega t\rangle = \langle\cos^2\omega t\rangle = \frac{1}{2}\quad,
+\end{equation}
+\end{subequations}
+meaning that linear harmonic terms will vanish when the time-average is computed. As the linear contribution is not enough, it is necessary to develop a perturbative expansion for the pressure up to second order, such that the calculated force include non-linear terms that will eventually remain in the time-averaged force. This development will be shown in the current section. First ideal flow is considered and the second-order perturbative expansion is developed. Then, the second order contributions will be expressed in terms of the first order contributions, which satisfy waves equation, such that the necessity to solve non-linear equations as \ref{intro.fluids.eq:mass_conservation} and \ref{intro.fluids.eq:euler_equation} will be avoided. After this evaluation, the waves equation shall be solved, using the proper boundary conditions at the particle surface, in order to compute the radiation acoustic force due to the pressure and velocity field scattered by the particle, in terms of the known incident fields.
 \subsection{The second order acoustic fields}
 Following the brief scheme of Gor'kov \cite{Gorkov1962,Bruus2012_07,Manneberg2009}, the acoustic radiation force on a particle immerse on a fluid is deducted from hydrodynamics in ideal fluids, in which the velocity field may be written as the gradient of a scalar velocity potential $\phi$ defined in \ref{intro.fluids.eq:velocity_potential} By considering ideal flow it is possible to solve the waves equation for only the velocity potential instead of dealing with a scalar pressure field and a vectorial velocity. Now using \ref{intro.acoustics.eq:expand_first_order} into \ref{intro.acoustics.eq:linear_NSE_eqs}, the first order harmonic contribution of the velocity and pressure are related with $\phi$ as
 \begin{equation}\label{intro.arf.eq:grad_phi_u1}
@@ -323,7 +336,16 @@ The incident field $\phi_{\text{in}}$ would be the solution for the ongoing wave
 \begin{equation}\label{intro.arf.eq:sc_multipoles}
     \phi_{sc} = -\frac{a(t_{\text{ret}})}{r} + (\vec A(t_{\text{ret}}) \cdot \nabla)\frac{1}{r} + \dots
 \end{equation}
-where $t_{\text{ret}} = t - r/c_0$ is the retarded time. The reader can notice that this is a retarded solution of the Laplace equation. The reason to write the solution in the form of \eqref{intro.arf.eq:sc_multipoles} is to be able to notice a separation of the time-scales where the action of the object to the medium is almost instantaneous by using \eqref{intro.arf.eq:R_ll_lambda} and evaluating the fields very close to the particle ($r \approx R_p $), leading to
+where $t_{\text{ret}} = t - r/c_0$ is the retarded time. Here we shall define the monopolar and dipolar terms for the scattered potential as follows:
+\begin{subequations}
+\begin{equation}\label{intro.arf.eq:monopolar_phi}
+    \phi_{\text{mp}}(\vec r,t) = -\frac{a(t)}{r}
+\end{equation}
+\begin{equation}\label{intro.arf.eq:dipolar_phi}
+    \phi_{\text{dip}}(\vec r,t) = \vec A(t)\nabla\left(\frac{1}{r}\right) = -\vec A(t)\frac{\vec r}{r^3}
+\end{equation}
+\end{subequations}
+The reader can notice that this is a retarded solution of the Poisson Equation with a small source. Indeed, it can be shown that \eqref{intro.arf.eq:sc_multipoles} is also a solution of the inhomogeneous Wave's equation where the source is localized in a small region of space around the origin. Please consider reading \cite[sec.~6.4]{Jackson} for details. The reason to write the solution in the form of \eqref{intro.arf.eq:sc_multipoles} is to be able to notice a separation of the time-scales where the action of the object to the medium is almost instantaneous by using \eqref{intro.arf.eq:R_ll_lambda} and evaluating the fields very close to the particle ($r \approx R_p $), leading to
 \begin{align}
     t_{\text{ret}} &= t - \frac{R_p}{c_0} \nonumber\\
     t_{\text{ret}} &= t - \frac{R_p}{\lambda}T \nonumber\\
@@ -337,7 +359,28 @@ reflecting the fact that nearby the boundary of the object the outer fluid is be
 \begin{equation}\label{intro.arf.eq:force_in_in}
     -\oint\left\langle\left(-\frac{\rho_0}{2}|\nabla\phi_{\text{in}}|^2 + \frac{\rho_0}{2c_0^2}\left[\frac{\partial\phi_{\text{in}}}{\partial t}\right]^2\right)\delta_{ij} + \rho_0\partial_i\phi_{\text{in}}\partial_j\phi_{\text{in}}\right\rangle dS_i\quad,
 \end{equation}
-as the incident field would be the solution in absence of the object, there for it does not have any physical effect on the particle, also, considering the fact that for the interest case of plane waves, the incident field is spatially homogeneous implying a symmetry over the surface and there for yielding zero. The other two contributions containing information about the scattered wave are
+as the incident field would be the solution in absence of the object, there for it does not have any physical effect on the particle, also, considering the fact that for the interest case of plane waves, the incident field is spatially homogeneous implying a symmetry over the surface and there for yielding zero \cite[~p.79]{Manneberg2009}\cite[~p.]{Bruus2012_07}. As the incident field are considered as plane waves, the derivatives fulfills the following:
+\begin{subequations}
+\begin{equation}
+    \phi_{\text{in}} = \phi_0 \cos(\vec k\cdot \vec r - \omega t)
+\end{equation}
+\begin{equation}
+    \nabla\phi_{\text{in}} = -\vec k \phi_0 \sin(\vec k\cdot \vec r - \omega t)
+\end{equation}
+\begin{equation}
+    \frac{\partial\phi_{\text{in}}}{\partial t} = \omega \phi_0 \sin(\vec k\cdot \vec r - \omega t) \quad,
+\end{equation}
+\end{subequations}
+with $\phi_0$ a constant amplitude. Now plugging this into \ref{intro.arf.eq:force_in_in} and considering the differential surface vector to be parallel to the surface normal vector $dS_i = \hat n_i dS$, the following is gotten:
+\begin{align}
+    &-\oint\left\langle\left(-\frac{\rho_0}{2}|-i\vec k\phi_{\text{in}}|^2 + \frac{\rho_0}{2c_0^2}(-i\omega\phi_{\text{in}})^2\right)\hat n_{j} + \rho_0(-i k_i\phi_{\text{in}})(-ik_j\phi_{\text{in}})\hat n_{i}\right\rangle dS\nonumber\\
+    &=-\oint\left(\frac{\rho_0 k^2}{2} - \frac{\rho_0\omega^2}{2c_0^2}\right)\phi_0^2\langle\sin^2(\vec k\cdot \vec r - \omega t)\rangle\hat n_{j} - \rho_0 k_ik_j\hat n_{i}\phi_0^2\langle\cos^2(\vec k\cdot \vec r - \omega t)\rangle dS \label{intro.arf.eq:force_in_in_plane_wave}
+\end{align}
+And using the dispersion relation $k = \omega / c_0$ which will be valid as the medium has a spatially constant propagation direction $\vec k$, the following is gotten:
+\begin{equation}\label{intro.arf.eq:force_in_in_zero}
+    -\oint\left(\frac{\rho_0 k^2}{2} - \frac{\rho_0 k^2}{2}\right)\frac{\phi_0^2}{2}\hat n_{j} dS -\rho_0 k_ik_j\frac{\phi_0^2}{2}\oint\hat n_{i} dS = 0\quad.
+\end{equation}
+The fact that $\hat n$ is a constant and normal vector in the entire surface makes the net integration of this vector over the symmetrical surface is zero. The other two contributions containing information about the scattered wave are
 \begin{equation}\label{intro.arf.eq:force_sc_sc}
     -\oint\left\langle\left(-\frac{\rho_0}{2}|\nabla\phi_{\text{sc}}|^2 + \frac{\rho_0}{2c_0^2}\left[\frac{\partial\phi_{\text{sc}}}{\partial t}\right]^2\right)\delta_{ij} + \rho_0\partial_i\phi_{\text{sc}}\partial_j\phi_{\text{sc}}\right\rangle dS_i
 \end{equation}
@@ -392,44 +435,68 @@ thus, it has been shown the possibility to reach an expression of the force only
 \begin{equation}\label{intro.arf.eq:F_sc}
     \langle F_{i} \rangle = - \rho_0\int \left\langle u_{\text{in}}^i\left(\nabla^2\phi_{sc}-\frac{1}{c_0^2}\frac{\partial^2\phi_{sc}}{\partial  t^2}\right)\right\rangle dV\quad,
 \end{equation}
-where we get the wave operator applied to the scattered field. Indeed, this wave equation is not homogeneous as the scattered field comes from the interaction between the particle and he fluid. For a small sphere, the retarded time multipole expansion \eqref{intro.arf.eq:sc_multipoles} is done as an analogous case of a point particle in electrostatics. the scalar field $a$ and vector field $\vec A$ are determined in the following way. Assuming the sphere to be a compressible one such that it shrinks or expands isotropically by simply enlarging or decreasing its radius. Considering a mathematical spherical region $\Omega$ of radius $R_{\Omega}$ concentric to the sphere with radius $R_p$ which fulfills $\lambda\gg R_{\Omega}\gg R_p$, such that there is an excess of fluid around the sphere, its outgoing mass flux would be computed using the mass conservation law in its integral form: 
+where we get the wave operator applied to the scattered field. Indeed, this wave equation is not homogeneous as the scattered field comes from the interaction between the particle and he fluid. For a small sphere, the retarded time multipole expansion \eqref{intro.arf.eq:sc_multipoles} is done as an analogous case of a point particle in electrostatics. the scalar field $a$ and vector field $\vec A$ are determined in the following way. Assuming the sphere to be a compressible one such that it shrinks or expands isotropically by simply enlarging or decreasing its radius, a mathematical spherical region $\Omega$ of radius $R_{\Omega}$ concentric to the sphere with radius $R_p$ which fulfills $\lambda\gg R_{\Omega}\gg R_p$ is considered, such that there is an excess of fluid around the sphere, thus, its outgoing mass flux would be computed as the following integral: 
 \begin{equation}
-    \dot m = \frac{\partial}{\partial t}\int_{\Omega}dV \rho_0 = -\int_\Omega dV \nabla\cdot(\rho_0\vec u) = -\oint_{\partial\Omega} dS (\rho_0\vec u)\cdot\hat n\quad,
+    \dot m = \frac{\partial}{\partial t}\int_{\Omega}dV \rho_1 = -\int_\Omega dV \nabla\cdot(\rho_0\vec u_1) = -\oint_{\partial\Omega} dS (\rho_0\vec u_1)\cdot\hat n\quad,
 \end{equation}
-where $\hat n$ is a vector normal to $\partial\Omega$. As its assumed that the outgoing flow has a velocity which is constant around the surface $\partial\Omega$ and parallel to $\hat n$, the only contributing term in \eqref{intro.arf.eq:sc_multipoles} is the one containing the spatially constant scalar field $a$ \cite[~p.282]{Landau}\cite[~p.70]{Manneberg2009}. Thus,
+In which we have kept only terms up to first order, as according to \eqref{intro.arf.eq:in_sc_potential} the macroscopic first-order fields are deducted from both the incident and scattered fields and we are interested in those. This mass flux which comes from the outside of the boundary of radius $R_\Omega$ is 
 \begin{equation}
-    \dot m = -\oint_{\partial\Omega} dS (\rho_0\nabla\phi_{\text{sc}})\cdot\hat n = a\rho_0\oint_{\partial\Omega} dS \nabla\left(\frac{1}{r}\right)\cdot\hat n\quad,
+    \dot m_{\text{out}} = - \oint_{\partial\Omega} dS(\rho_0\nabla\phi_{\text{mp}})\cdot\hat n
 \end{equation}
-then applying the gradient and evaluating in the spherical surface where $r=R_\Omega$ the integral is reduced to
+where $\hat n$ is a vector normal to $\partial\Omega$. As we are interested in the case where the sphere only vibrates maintaining its center of mass motionless \cite[~p.282]{Landau}, \cite[~p.70]{Manneberg2009} only the monopolar contribution \eqref{intro.arf.eq:monopolar_phi} will be relevant for this computation. Thus,
+\begin{equation}
+    \oint_{\partial\Omega} dS (\rho_0\nabla\phi_{\text{mp}})\cdot\hat n = a\rho_0\oint_{\partial\Omega} dS \nabla\left(\frac{1}{r}\right)\cdot\hat n = -a(t)\oint_{\partial\Omega} dS\frac{\vec r}{r^3}\cdot\hat n\quad,
+\end{equation}
+then applying the gradient and evaluating in the spherical surface where $r=R_\Omega$, with $\hat n = \hat r$ due to be $\vec r$ a position measured from the center of the sphere, the integral is reduced to
 \begin{equation}\label{intro.arf.eq:a_surf_int}
-    \dot m = \frac{a\rho_0}{R_\Omega^2}\oint_{\partial\Omega} dS = \frac{a\rho_0}{R_\Omega^2} (4\pi R_\Omega^2) = 4\pi a\rho_0\quad.
+    \dot m_{\text{out}} = a\rho_0\oint_{\partial\Omega}\frac{\hat r\cdot\hat r}{R_\Omega^2} dS = \frac{a\rho_0}{R_\Omega^2} (4\pi R_\Omega^2) = 4\pi a\rho_0\quad.
 \end{equation}
-As this integral should be zero for the case of incompressible fluid, the only way to obtain a non-zero result from \eqref{intro.arf.eq:a_surf_int} is by considering the volume of the sphere $V_p$ to change as was affirmed previously. Then, by a change of the volume of the particle in time we have
+Now we can compute the flow of mass going out of the spherical surface of radius $R_\Omega$. This mass flux is basically the rate of change of the incoming fluid density times the volume of the particle, because the presence of the particle exerts an amount of fluid occupied now by the object. Then,
+\begin{equation}\label{intro.arf.eq:m_in}
+    \dot{m}_{\text{in}} = \frac{\partial}{\partial t}[(\rho_0 + \rho_{\text{in}})V_p]\quad.
+\end{equation}
+The variation of the particle's volume $V_p$ will be due to the compression of the incident field, thus, the time derivative is strictly related with the Bulk's module defined in \eqref{intro.acoustics.eq:sound_speed_bulk}, via \eqref{intro.acoustic.eq:Bulk_thermodynamic}. Then we can write the following thanks to the chain rule:
+\begin{equation}
+    \frac{\partial V_p}{\partial t} = \frac{\partial V_p}{\partial p_{\text{in}}}\frac{\partial p_{\text{in}}}{\partial t} = -\frac{V_p}{\rho_p c_p^2}\frac{\partial (c_0^2\rho_{\text{in}})}{\partial t} = -V_p\frac{c_0^2}{\rho_pc_p^2}\frac{\partial\rho_{\text{in}}}{\partial t}\quad,
+\end{equation}
+and using this expression \eqref{intro.arf.eq:m_in} becomes
 \begin{align}
-    4\pi a\rho_0 &= \rho_0\dot V_p \nonumber\\
-    a &= \frac{\dot V_p}{4\pi}
+    \dot{m}_{\text{in}} &= \rho_0\frac{\partial V_p}{\partial t} + \rho_{\text{in}}\frac{\partial V_p}{\partial t} + V_p\frac{\partial\rho_{\text{in}}}{\partial t} \nonumber\\
+    &= -V_p\frac{\rho_0c_0^2}{\rho_pc_p^2}\frac{\partial\rho_{\text{in}}}{\partial t} -V_p\frac{c_0^2}{\rho_pc_p^2}\rho_{\text{in}}\frac{\partial\rho_{\text{in}}}{\partial t} + V_p\frac{\partial\rho_{\text{in}}}{\partial t} \nonumber\\
+    &= -V_p\frac{\rho_0c_0^2}{\rho_pc_p^2}\frac{\partial\rho_{\text{in}}}{\partial t} -V_p\frac{c_0^2}{\rho_pc_p^2}\frac{1}{2}\frac{\partial(\rho_{\text{in}}^2)}{\partial t} + V_p\frac{\partial\rho_{\text{in}}}{\partial t} \nonumber\\
+    &= -V_p\frac{c_0^2}{\rho_pc_p^2}\frac{\partial}{\partial t}\left(\rho_0\rho_{\text{in}} + \frac{1}{2}\rho_{\text{in}}^2\right) + V_p\frac{\partial\rho_{\text{in}}}{\partial t}\quad.
 \end{align}
-as we consider the fluid to be incompressible. For the compressible case, the total volume surrounded by $\Omega$ includes the volume occupied by the particle, that is $V_p$, and the volume of the fluid around the sphere. The total mass flux would be then written as a contribution of an incompressible volume volume rate $\dot{V}_{\text{incompressible}}$ due to the driven oscillation of the sphere compression and a compressible one $\dot{V}_{\text{compressible}}$ due to the ongoing incident waves. In total we have
-\begin{equation}\label{intro.arf.eq:4piarho_Vin-Vcomp}
-    4\pi a \rho_0 = \dot{V}_{\text{incompressible}} - \dot{V}_{\text{compressible}}\quad.
+As mentioned before, the incident density is a perturbation of the total density of the fluid and this implies that the bulk density $\rho_0$ is much larger than the incident field $\rho_{\text{in}}$, thus the term proportional to $\rho_{\text{in}}^2$ shall be vanished as well, ending up with
+\begin{equation}\label{intro.arf.eq:m_in_solved}
+    \dot{m}_{\text{in}} = V_p\frac{\partial\rho_{\text{in}}}{\partial t}\left(1-\frac{\rho_0c_0^2}{\rho_pc_p^2}\right)\quad.
 \end{equation}
-The substraction is made in order to be consistent with the physical fact that if the ongoing wave produces the same amount of change in the volume than the one made by the pulsation of the sphere, then the net mass flux is zero, because the same amount of mass entering $\Omega$ would be the same that comes out when the sphere expands. But this situation will only occur if the compressibility of both the fluid and the sphere's material is the same, as will be shown later on. In the imcompressible case, as the particle keeps a constant volume the outgoing flow-rate is produced by a change of the density. Thus, the incompressible contribution would be proportional to the fraction of the change in the density
-\begin{equation}\label{intro.arf.eq:V_incomp}
-    \dot{V}_{\text{incompressible}} = \frac{V_p}{\rho_0}\dot{\rho_{\text{in}}}\quad.
-\end{equation}
-The compressible contribution will be considered as the effect of an ongoing wave passing through the sphere, which generates a small change $d p_{\text{in}}$ in the sphere related with a small change of the volume $dV_p$ in the following way:
-\begin{equation}
-    \frac{dV_p}{V_p} = \frac{1}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S dp_{\text{in}}\quad,
-\end{equation}
-where the compressibility comes to play an important role. For variations in time we shall write instead
-\begin{equation}
-     \dot{V}_{\text{compressible}} = \frac{dV_p}{dt} = \frac{V_p}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S \frac{dp_{\text{in}}}{dt}\quad,
-\end{equation}
-such that with the help of the state equation \eqref{intro.acoustics.eq:linear_p_rho} and \eqref{intro.acoustics.eq:c2_dp_drho} it is possible to finally write
-\begin{equation}\label{intro.arf.eq:V_comp}
-    \frac{dV_p}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2} \frac{d\rho_{\text{in}}}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2}\dot{\rho}_{\text{in}}\quad.
-\end{equation}
-Now, using \eqref{intro.arf.eq:V_incomp} and \eqref{intro.arf.eq:V_comp} the scalar field $a$ is obtained from \eqref{intro.arf.eq:4piarho_Vin-Vcomp} as
+Such that $a(t)$ may be gotten by only equaling \eqref{intro.arf.eq:a_surf_int} and \eqref{intro.arf.eq:m_in_solved} as the incoming mass must be equal to the outgoing mass exchanged at the boundary $\partial\Omega$ (the mass is conserved). Thus
+% As this integral should be zero for the case of incompressible fluid, the only way to obtain a non-zero result from \eqref{intro.arf.eq:a_surf_int} is by considering the volume of the sphere $V_p$ to change as was affirmed previously. Then, by a change of the volume of the particle in time we have
+% \begin{align}
+%     4\pi a\rho_0 &= \rho_0\dot V_p \nonumber\\
+%     a &= \frac{\dot V_p}{4\pi}
+% \end{align}
+% as we consider the fluid to be incompressible. For the compressible case, the total volume surrounded by $\Omega$ includes the volume occupied by the particle, that is $V_p$, and the volume of the fluid around the sphere. The total mass flux would be then written as a contribution of the inner volume rate $\dot{V}_{\text{inner}}$ due to the driven oscillation of the sphere compression and an outer one $\dot{V}_{\text{outer}}$ due to the ongoing incident waves. In total we have
+% \begin{equation}\label{intro.arf.eq:4piarho_Vin-Vcomp}
+%     4\pi a \rho_0 = \dot{V}_{\text{inner}} - \dot{V}_{\text{outer}}\quad.
+% \end{equation}
+% The substraction is made in order to be consistent with the physical fact that if the ongoing wave produces the same amount of change in the volume than the one made by the pulsation of the sphere, then the net mass flux is zero, because the same amount of mass entering $\Omega$ would be the same that comes out when the sphere expands. But this situation will only occur if the compressibility of both the fluid and the sphere's material is the same, as will be shown later on. In the inner case, as the particle keeps a constant volume the outgoing flow-rate is produced by a change of the density. Thus, the inner contribution would be proportional to the fraction of the change in the density
+% \begin{equation}\label{intro.arf.eq:V_incomp}
+%     \dot{V}_{\text{inner}} = \frac{V_p}{\rho_0}\dot{\rho_{\text{in}}}\quad.
+% \end{equation}
+% The compressible contribution will be considered as the effect of an ongoing wave passing through the sphere, which generates a small change $d p_{\text{in}}$ in the sphere related with a small change of the volume $dV_p$ in the following way:
+% \begin{equation}
+%     \frac{dV_p}{V_p} = \frac{1}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S dp_{\text{in}}\quad,
+% \end{equation}
+% where the compressibility comes to play an important role. For variations in time we shall write instead
+% \begin{equation}
+%      \dot{V}_{\text{outer}} = \frac{dV_p}{dt} = \frac{V_p}{\rho_p}\left(\frac{\partial\rho_p}{\partial p}\right)_S \frac{dp_{\text{in}}}{dt}\quad,
+% \end{equation}
+% such that with the help of the state equation \eqref{intro.acoustics.eq:linear_p_rho} and \eqref{intro.acoustics.eq:c2_dp_drho} it is possible to finally write
+% \begin{equation}\label{intro.arf.eq:V_comp}
+%     \frac{dV_p}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2} \frac{d\rho_{\text{in}}}{dt} = V_p\frac{c_0^2}{\rho_p c_p^2}\dot{\rho}_{\text{in}}\quad.
+% \end{equation}
+% Now, using \eqref{intro.arf.eq:V_incomp} and \eqref{intro.arf.eq:V_comp} the scalar field $a$ is obtained from \eqref{intro.arf.eq:4piarho_Vin-Vcomp} as
 \begin{equation}\label{intro.arf.eq:a_field_Vp}
     a(t) = \frac{V_p}{4\pi\rho_0}\frac{\partial\rho_{in}}{\partial t}\left(1-\frac{\rho_0c_0^2}{\rho_pc_p^2}\right)\quad,
 \end{equation}
@@ -439,136 +506,134 @@ or in terms of the particle's radius
 \end{equation}
 noting the proportionality with the cube of the radius. From this scalar field the non-dimensional contrast factor $f_1$ is defined in terms of the compressibility of the fluid $\kappa_0 = 1/(\rho_0c_0^2)$ and the compressibility of the particle $\kappa_p = 1/(\rho_pc_p^2)$ as
 \begin{equation}\label{intro.arf.eq:f1}
-    f_1 = 1-\frac{\kappa_p}{\kappa_0}
+    f_1 = 1-\frac{\rho_0 c_0^2}{\rho_p\c_p^2} = 1-\frac{\kappa_p}{\kappa_0}
 \end{equation}
 indicating that if both compressibilities match for both media, the particle and the fluid, the monopole term of \eqref{intro.arf.eq:sc_multipoles} does not contribute to the force. 
 
-The vector field $\vec A$ appearing in the second term of \eqref{intro.arf.eq:sc_multipoles} (the dipole contribution) is related to the energy and the total momentum of the fluid when the particle is moving through it, as it transfers momentum back and for when oscillatory motion is achieved. The kinetic energy carried by the fluid has the following form:
-\begin{equation}\label{intro.arf.eq:energy_int_vol}
-    E = \frac{1}{2}\int_{\Sigma} \rho_0 u^2 dV\quad,
+Now let's consider the dipole contribution for the potential. First, the solution to consider for a sphere moving with velocity $\vec v$ and immersed to the fluid has the form
+\begin{equation}\label{intro.arf.eq:dipolar_phi}
+    \phi_{\text{dip}} = \vec A \cdot \nabla\left(\frac{1}{r}\right) = -\vec A\cdot\frac{\vec r}{r^3}\quad.
 \end{equation}
-where $\Sigma$ is a region that covers most of the outer fluid except the volume occupied by the particle. This region will be defined as a sphere of radius $R_\Sigma$ concentric to the particle, but this radius is so large that it may cover all the fluid, letting it tend to infinite \cite[~p.27]{Landau}. Defining $\vec v$ as the particle's velocity, this identity which is not too hard to show
-\begin{equation}
-    u^2 = v^2 + (\vec u + \vec v)\cdot(\vec u - \vec v)\quad
-\end{equation}
-will be  plugged into the integrand of \eqref{intro.arf.eq:energy_int_vol} to write
-\begin{equation}
-    \int_{\Sigma} u^2 dV = \int_{\Sigma} v^2 dV + \int_{\Sigma} u^2 dV + \int_{\Sigma} (\vec u + \vec v)\cdot(\vec u - \vec v) dV\quad.
-\end{equation}
-The first term of the right-hand side is simply $v^2(V_\Sigma - V_p)$ because the velocity of the particle does not depend on the spatial coordinates. Regarding the second term, we want to transform the volume integral to a surface integral by using the Gauss theorem. In order to do this, we write first the first factor as a gradient as follows:
-\begin{equation}
-    \partial_i(\phi + v_k r_k) = (\partial_i\phi + \partial_i(v_k r_k)) = u_i + v_k\partial_i r_k = u_i + v_k\delta_{ik} = u_i + v_i\quad,
-\end{equation}
-then, the divergence of the product shall be computed, taking into account that $\partial_i u_i = 0$ due to incompressibility and $\partial_i v_i = 0$ due to spatial independence, as
-\begin{equation}
-    \partial_i[(u_i - v_i)(\phi + v_kr_k)] = (u_i - v_i)\partial_i(\phi + v_k r_k)
-\end{equation}
-implying
-\begin{equation}\label{intro.arf.eq:energy_int_surf}
-    \int_{\Sigma} u^2 dV = v^2(V_\Sigma - V_p) + \oint_{\partial\Sigma} (\phi + \vec v\cdot\vec r)(\vec u - \vec v)\cdot\hat n dS 
-\end{equation}
-where $\partial\Sigma = S + S_p$, being $S$ the outer surface of the sphere of radius $R_\Sigma$ and $S_p$ the surface area of the particle. There is as boundary condition to be fulfilled at the surface of the particle. The normal component of the fluid velocity must be equal to the normal component of the particle velocity, leading to cancel the integration over $S_p$. As we have assumed incompressibility without any change of the volume of the object, only the dipole term of \eqref{intro.arf.eq:sc_multipoles} which includes $\vec A$ will contribute to the integration. This term might be written as
-\begin{equation}\label{intro.arf.eq:phi_dipole}
-    \vec A(t) \cdot \nabla\left(\frac{1}{r}\right) = -\vec A(t) \cdot \frac{\hat r}{r^2}\quad,
-\end{equation}
-and the velocity $\vec u$ as
-\begin{equation}\label{intro.arf.eq:grad_phi_dipole}
-    \vec u = \nabla\left(\vec A \cdot \frac{\hat r}{r^2}\right) = (\vec A \cdot \nabla)\frac{\hat r}{r^2} = \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{r^3}\quad.
-\end{equation}
-such that the integrand of \eqref{intro.arf.eq:energy_int_vol} becomes, considering that both the potential and the surface $S$ are centered at the origin so $\hat n = \hat r$ and $r = R_\Sigma$ we have
-\begin{align}
-    &\oint_{S} \left(-\vec A\cdot \frac{\hat r}{R_\Sigma^2} + R_\Sigma\vec v\cdot\hat r\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) (R_\Sigma^2d\Omega) \nonumber\\
-    =&\oint_{S} \left(-\vec A\cdot\hat r + R_\Sigma^3(\vec v\cdot\hat r)\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) d\Omega\quad,
-\end{align}
-and expanding the product and neglecting the term proportional to $R_\Sigma^{-3}$ due to be so small
-\begin{align}
-    &\oint_{S} \left((\vec A\cdot\hat r)\vec v + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r)\hat r - (\vec v\cdot\hat r)\vec A - R_\Sigma^3(\vec v\cdot\hat r)\vec v\right)\cdot\hat r d\Omega\nonumber\\
-    =&\oint_{S} \left((\vec A\cdot\hat r)(\vec v\cdot\hat r) + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - (\vec v\cdot\hat r)(\vec A\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\nonumber\\
-    =&\oint_{S} \left(3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\quad.
-\end{align}
-As both $\vec A$ and $\vec v$ are constants in space, it is possible to let them out of the integration so that we end up integrating the dyadic product of the unit vectors giving one third of the identity matrix \cite[~p.28]{Landau}, leading to
-\begin{align}
-    &\oint_{S} \left(3(A_i\hat r_i)(v_k\hat r_k) - R_\Sigma^3(v_i\hat r_iv_k\hat r_k)\right)d\Omega \nonumber\\
-    =&(3A_iv_k - R_\Sigma^3 v_iv_k)\oint_{S} \hat r_i\hat r_k d\Omega \nonumber\\
-    =&(3A_iv_k - R_\Sigma^3 v_iv_k)\frac{4\pi}{3}\delta_{ij} \nonumber\\
-    =&4\pi\left((\vec A\cdot\vec v) - \frac{R_\Sigma^3}{3}v^2\right)\quad.
-\end{align}
-With this result, it is possible to write the total energy defined in \eqref{intro.arf.eq:energy_int_vol} as 
-\begin{align}
-    E &= \frac{\rho_0}{2}\left(v^2\left(\frac{4\pi R_\Sigma^3}{3} - V_p\right) + 4\pi\left(\vec A\cdot\vec v - \frac{R_\Sigma^3}{3}\right)\right)\nonumber\\
-    E &= \frac{\rho_0}{2}\left(4\pi\vec A\cdot\vec v - v^2V_p\right)\quad.\label{intro.arf.eq:energy_A}
-\end{align}
-The kinetic energy is related to the exchange of momentum between the particle and the fluid. Indeed, one expression for the energy may be defined using the symmetric induced-mass tensor $m_{ij}$, which is determined by the constant field $\vec A$ and it would be useful to find the momentum exerted by the motion of the object. The energy is then written as 
-\begin{equation}
-    E = \frac{1}{2}m_{ij}v_iv_j\quad,
-\end{equation}
-and the momentum is related to the energy considering a force $\vec F$ exerted by the object which produces a change in momentum $d\vec P$ calculated via
-\begin{equation}
-    d\vec P = \vec F dt \quad,
-\end{equation}
-multiplying by the velocity of the sphere we can see that the energy appears naturally
-\begin{equation}\label{intro.arf.eq:dP_dE}
-    \vec v\cdot d\vec P = \vec v\cdot\vec F dt = dE\quad.
-\end{equation}
-being clear that the momentum is obtained in terms of $\vec A$, by comparing \eqref{intro.arf.eq:energy_A} and \eqref{intro.arf.eq:dP_dE}, as
-\begin{equation}\label{intro.arf.eq:P_A}
-    \vec P = \rho_0\left(4\pi\vec A - V_p\vec v\right)\quad,
-\end{equation}
-and it's also obtained in terms of the induced-mass tensor as
-\begin{equation}\label{intro.arf.eq:P_mij}
-    P_i = m_{ij}v_j\quad.
-\end{equation}
-Regarding the motion of the particle itself, there are enough elements to write a motion equation for it, taking into account that the recently calculated momentum is returned back to the particle by third Newton's law and the driven force made by the fluid, for now considered as an external force $\vec f$. The motion equation is then
-\begin{equation}\label{intro.arf.eq:motion_eq_left}
-    m_p\frac{d\vec v}{dt} + \frac{d\vec P}{dt} = \vec f\quad,
-\end{equation}
-and the left-hand side may be written using \eqref{intro.arf.eq:P_mij} as
-\begin{equation}\label{intro.arf.eq:motion_eq_tensor_left}
-    (m_p\delta_{ij} + m_{ij})\frac{d v_j}{dt} = f_i\quad.
-\end{equation}
-The external force is made by the fluid to provoke an oscillatory driven motion. If the volume occupied by the particle was completely occupied by the fluid and the velocity of this body is the same as the fluid, the carried momentum would be simply $\rho_0V_p\vec u$ and the force its derivative in time, with $\vec u$ the velocity of the fluid at the position of the particle if it were not there. However, the body is going with its own speed $\vec v$ which will not always coincide with $\vec u$, thus, the total momentum requires and additional term regarding the exchange of momentum with the fluid. This term is basically \eqref{intro.arf.eq:P_mij} but the velocity in the product will be instead the relative velocity between the particle and the fluid, which is $\vec u - \vec v$. In this sense, the total momentum is computed by
-\begin{equation}\label{intro.arf.eq:motion_eq_fluid}
-    m_p\frac{dv_i}{dt} = \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{d}{dt}(v_j - u_j)\quad,
-\end{equation}
-simplified as
-\begin{align}
-    m_p\delta_{ij}\frac{dv_j}{dt} &= \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{dv_j}{dt} + m_{ij}\frac{du_j}{dt}\nonumber\\
-    (m_p\delta_{ij} + m_{ij})\frac{dv_j}{dt} &=(\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}\quad.\label{intro.arf.eq:complete_eq_motion}
-\end{align}
-to identify the driven force at the right-hand side of \eqref{intro.arf.eq:motion_eq_left} in the form of
-\begin{equation}
-    f_i = (\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}
-\end{equation}
-and the following relation between the velocity of the fluid and the velocity of the particle:
-\begin{equation}\label{intro.arf.eq:u_v_equation}
-    (m_p\delta_{ij} + m_{ij})v_j =(\rho_0V_p\delta_{ij} + m_{ij})u_j\quad,
-\end{equation}
-obtained after integrating \eqref{intro.arf.eq:complete_eq_motion} respect to time. This expression is essential to obtain a velocity potential which conserves the momentum during the fluid-particle interaction. One boundary condition which is left to approach, barely mentioned, is the one were the normal velocities matches
+A first boundary condition is the fact that during the motion of the sphere there is no flow passing  through the body, the normal velocities matches
 \begin{equation}\label{intro.arf.eq:vn_un}
-    \vec u\cdot\hat r = \vec v\cdot \hat r\quad.
+    \vec u\cdot\hat r = \vec v\cdot \hat r\quad,
 \end{equation}
-In order to include this boundary condition, the expression \eqref{intro.arf.eq:grad_phi_dipole} will help on this purpose in the following way:
+Now the velocity $\vec u$ will be a fluid velocity around the sphere due to the disturbance of the sphere, but it is measured in a reference frame where there is no external flow. Then
+\begin{equation}\label{intro.arf.eq:grad_phi_dipole}
+    \vec u = \nabla\left(-\vec A \cdot \frac{\hat r}{r^2}\right) = -(\vec A \cdot \nabla)\frac{\hat r}{r^2} = \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{r^3}\quad,
+\end{equation}
+which leads to
 \begin{align}
     \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{R_p^3}\cdot\hat r &= \vec v\cdot \hat r\nonumber\\
     \frac{2(\vec A\cdot\hat r)}{R_p^3} &= \vec v\cdot\hat r\nonumber\\
     \vec A\cdot\hat r &= \frac{R_p^3}{2} (\vec v\cdot\hat r) \nonumber\\
-    \vec A &= \frac{R_p^3}{2} \vec v\quad.\label{intro.arf.eq:A_un_vn}
+    \vec A &= \frac{R_p^3}{2} \vec v\label{intro.arf.eq:A_dipole_v}\quad.
 \end{align}
-We could do this short calculation from the beginning, but \eqref{intro.arf.eq:A_un_vn} does not fulfills momentum conservation. Instead, it will provide information about the induced mass tensor equaling \eqref{intro.arf.eq:P_A} and \eqref{intro.arf.eq:P_mij}
-\begin{align}
-    m_{ij}v_j &= \rho_0\left(\frac{4\pi R_p^3}{2} - \frac{4\pi R_p^3}{3} \right)v_i\nonumber\\
-    m_{ij}&= \frac{2\pi\rho_0R_p^3}{3}\delta_{ij}\label{intro.arf.eq:m_ij_A}
+The vector $\vec A$ is related now to the dipolar moment of a \textit{Doublet} and the fluid velocity written at \eqref{intro.arf.eq:grad_phi_dipole} would take the following form:
+\begin{equation}\label{intro.arf.eq:vel_dipole}
+    \vec u = \frac{R_p^3}{2}\frac{3(\vec v\cdot\hat r)\hat r - \vec v}{r^3} = \frac{R_p^3}{2}\left(\frac{3(\vec v\cdot\vec r)\vec r}{r^5} - \frac{\vec v}{r^3}\right)
+\end{equation}
+But the motion occurs due to the interaction between the fluid and the object immersed to it, meaning that the momentum must be conserved between them and the considered boundary condition is not enough. In order to take into account this interaction, we shall calculate the \textbf{drag} force made by the fluid on the object but this time, as mentioned earlier, the fluid was assumed incompressible due to the length-scale separation between the wavelength and the radius of the object \eqref{intro.arf.eq:R_ll_lambda} and with this the force made by the fluid is 
+\begin{equation}\label{intro.arf.eq:drag_F}
+     \vec F_{i}^{\text{(drag)}} = - \oint \left(-\frac{\rho_0}{2}|\nabla\phi_{\text{dip}}|^2-\frac{\partial\phi_{\text{dip}}}{\partial t}\right)\bigg|_{r=R_p}\hat n dS \quad,
+\end{equation}
+where the Bernoulli principle has been used \cite{Kundu}. (This expression is basically \eqref{intro.arf.eq:general_arf_phi} but taking away the squared pressure term du to incompressinility and the dyadic tensor term because only the normal contribution contributes to the drag). Then, using \eqref{intro.arf.eq:dipolar_phi} and \eqref{intro.arf.eq:A_dipole_v} we can get the time derivative as
+\begin{equation}\label{intro.arf.eq:dphi_dt_first}
+    \frac{\partial\phi_{\text{dip}}}{\partial t} = -\frac{\partial\vec v}{\partial t}\cdot\left(\frac{R_p^3}{2}\frac{\vec r}{r^3}\right) - \vec v\cdot\left(\frac{R_p^3}{2}\frac{\partial}{\partial t}\left(\frac{\vec r}{r^3}\right)\right)
+\end{equation}
+By using the chain rule it's possible to rewrite for the second term of \eqref{intro.arf.eq:d_phi_dt} as
+\begin{equation}\label{intro.arf.eq:chain_d_phi_dt}
+    v_i\frac{\partial}{\partial t}\left(\frac{R_p^3}{2}\frac{r_i}{r^3}\right) = v_i\frac{\partial}{\partial r_j}\left(\frac{R_p^3}{2}\frac{r_i}{r^3}\right)\frac{\partial r_j}{\partial t} = \nabla\left(\frac{R_p^3}{2}\frac{v_ir_i}{r^3}\right)\cdot\frac{\partial\vec r}{\partial t} = -\nabla\phi_{\text{dip}}\cdot\frac{\partial\vec r}{\partial t}
+\end{equation}
+since $\vec v$ is not dependent of the space coordinates as mentioned earlier. The time derivative of the vector position is related to the motion of the object. The position vector must be relative to the center of the sphere, thus $\vec r$ actually becomes
+\begin{equation}\label{intro.arf.eq:dr_dt}
+    \vec r = \vec r_0 - t\vec v\quad,
+\end{equation}
+where $\vec r_0$ is a position measured in a static reference frame, thus, its time derivative yields to zero and \label{intro.arf.eq:dr_dt} becomes
+\begin{equation}
+    \frac{\partial\vec r}{\partial t} = -\vec v\quad,
+\end{equation}
+meaning that \eqref{intro.arf.eq:chain_d_phi_dt} becomes
+\begin{equation}
+    v_i\frac{\partial}{\partial t}\left(\frac{r_i}{r^3}\right) = -\nabla\phi_{\text{dip}}\cdot\frac{\partial\vec r}{\partial t} = \nabla\phi_{\text{dip}}\cdot\vec v
+\end{equation}
+and the time derivative of $\phi_{\text{dip}}$ is written according to \eqref{intro.arf.eq:dphi_dt_first} as
+\begin{equation}
+    \frac{\partial\phi_{\text{dip}}}{\partial t} = -\frac{\partial\vec v}{\partial t}\cdot\left(\frac{R_p^3}{2}\frac{\vec r}{r^3}\right) - \nabla\phi_{\text{dip}}\cdot\vec v\quad,
+\end{equation}
+and using \eqref{intro.arf.eq:vel_dipole} we get finally
+\begin{align}\label{intro.arf.eq:d_phi_dt}
+    \frac{\partial\phi_{\text{dip}}}{\partial t} &= -\frac{R_p^3}{2}\left(\frac{\partial v}{\partial t}\cdot\left(\frac{\vec r}{r^3}\right) - 3\frac{(\vec r\cdot\vec v)^2}{r^5} + \frac{v^2}{r^3}\right)\nonumber\\
+    \frac{\partial\phi_{\text{dip}}}{\partial t} &= -\frac{R_p^3}{2r^3}\left(\vec r\cdot\frac{\partial\vec v}{\partial t} + 3\frac{(\vec r\cdot\vec v)^2}{r^2}-v^2\right)\quad.
 \end{align}
-Also, it will let us find the actual field which already satisfies momentum conservation rewritting \eqref{intro.arf.eq:u_v_equation} as
+The square of the gradient is, using \eqref{intro.arf.eq:vel_dipole} and \eqref{intro.arf.eq:A_dipole_v},
+\begin{equation}
+    |\nabla\phi|^2 = \left(\frac{R_p^3}{2}\right)^2\left|\frac{3(\vec v\cdot\vec r)}{r^5}\vec r - \frac{\vec v}{r^3}\right|^2\quad,
+\end{equation}
+which written as an expanded double dot product takes the following form
 \begin{align}
-    (m_p\delta_{ij} + m_{ij})v_j &=(\rho_0V_p\delta_{ij} + m_{ij})u_j\nonumber\\
-    \left(m_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}v_j &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}u_j\nonumber\\
+    |\nabla\phi|^2 &= \left(\frac{R_p^3}{2}\right)^2\left(\frac{3(\vec v\cdot\vec r)\vec r}{r^5} - \frac{\vec v}{r^3}\right)\cdot\left(\frac{3(\vec v\cdot\vec r)\vec r}{r^5} - \frac{\vec v}{r^3}\right)\nonumber\\
+    |\nabla\phi|^2 &= \left(\frac{R_p^3}{2}\right)^2\left(\frac{9(\vec v\cdot\vec r)^2}{r^{8}} + \frac{v^2}{r^6} - \frac{6(\vec v\cdot\vec r)^2}{r^{8}}\right)\nonumber\\
+    |\nabla\phi|^2 &= \left(\frac{R_p^3}{2}\right)^2\left(\frac{3(\vec v\cdot\vec r)^2}{r^{8}} + \frac{v^2}{r^6}\right)\nonumber\\
+    |\nabla\phi|^2 &= \left(\frac{R_p^3}{2r^3}\right)^2\left(3\frac{(\vec r\cdot\vec v)^2}{r^2} + v^2\right)\quad.\label{intro.arf.eq:grad_phi_2}
+\end{align}
+Now plugging both expressions \eqref{intro.arf.eq:d_phi_dt} and \eqref{intro.arf.eq:grad_phi_2} into \label{drag_F} we get
+\begin{align}
+    \vec F^{\text{(drag)}} &= - \rho_0\oint \left(\frac{1}{2}\left(R_p\hat r\cdot\frac{\partial\vec v}{\partial t} + 3(\hat r\cdot\vec v)^2 - v^2\right) -\frac{1}{8}\left(3(\hat r\cdot\vec v)^2 + v^2\right)\right)\hat n dS\nonumber\\
+    &= - \oint \frac{R_p}{2}\hat r\cdot\frac{\partial\vec v}{\partial t}\hat n dS - \oint \frac{v^2}{2}\left(\frac{9}{4}\frac{(\hat r\cdot\vec v)^2}{v^2} - \frac{5}{4}\right)\hat n dS\quad.
+\end{align}
+Then using the fact that $\theta$ is the angle between the motion of the sphere $v$ and $r$ we have for the second integral, and
+\begin{equation}
+    \hat{r}\cdot\vec{v} = v\cos\theta
+\end{equation}
+we can write
+\begin{equation}
+    \rho_0\int_{0}^{2\pi}\int_{0}^{\pi} \frac{v^2}{2}\left(1-\frac{9}{4}\sin^2\theta\right)\hat n (R_p^2\sin\theta d\phi d\theta)\quad,
+\end{equation}
+as the surface is a sphere and $\vec r$ points at the center of the sphere then $\hat n = \hat r$, then
+\begin{align}
+    \rho_0\int_{0}^{2\pi}\int_{0}^{\pi}&\frac{v^2}{2}\left(1-\frac{9}{4}\sin^2\theta\right)(\cos\phi\sin\theta, \sin\phi\sin\theta, \cos\theta) (R_p^2\sin\theta d\phi d\theta)\nonumber\\
+    = \frac{\rho_0v^2R_p^2}{2}\int_{0}^{2\pi}\int_{0}^{\pi}\bigg[&\cos\phi\left(\sin^2\theta-\frac{9}{4}\sin^4\theta\right), \nonumber \\
+    &\sin\phi\left(\sin^2\theta-\frac{9}{4}\sin^4\theta\right), \nonumber\\
+    &\cos\theta\left(\sin\theta-\frac{9}{4}\sin^3\theta\right)\bigg] d\phi d\theta\quad,\label{intro.arf.eq:second_integral}
+\end{align}
+the integration over $\phi$ vanishes the first two components, while the third one becomes
+\begin{align}
+    &\pi \rho_0v^2R_p^2\int_{0}^{\pi}\cos\theta\sin\theta - \frac{9}{4}\cos\theta\sin^3\theta d\theta \nonumber\\ 
+    &\pi \rho_0v^2R_p^2\left[\frac{1}{2}\sin^2\theta - \frac{9}{16}\sin^4\theta\right]_0^{\pi} = 0
+\end{align}
+Now the first integral includes the acceleration of the sphere and it gives
+\begin{equation}\label{intro.arf.eq:first_integral}
+    \frac{\partial v}{\partial t}\frac{R_p^3\rho_0}{2}(2\pi)\int_{0}^{\pi}(\hat r\cdot\hat e_{z})\cos\theta\hat e_{z}\sin\theta d\theta = \frac{\partial v}{\partial t}\pi R_p^3\hat e_z\rho_0\int_{0}^{\pi}\cos^2\theta\sin\theta d\theta
+\end{equation}
+taking into account that $\theta$ is an angle measured from the direction of $\vec v$ and $\vec r$, meaning that this term will get the same direction of $\vec v$. While the integral may be solved in the following way:
+\begin{equation}
+    \int_{0}^{\pi}\cos^2\theta\sin\theta d\theta = -\frac{1}{3}\cos^3\theta\bigg|_0^{\pi} = -\frac{(-1)^3 - (1)^3}{3} = \frac{2}{3}
+\end{equation}
+resulting in the following expression for \eqref{intro.arf.eq:first_integral}:
+\begin{equation}
+    \pi R_p^3\rho_0\int_{0}^{\pi}\cos^2\theta\sin\theta d\theta = \frac{2\pi R_p^3\rho_0}{3}\quad.
+\end{equation}
+This means that the drag force exerted is
+\begin{equation}
+    \vec F^{\text{(drag)}} = -\frac{2\pi R_p^3\rho_0}{3}\frac{\partial v}{\partial t}\hat e_{z} \equiv -M_{\text{add}}\frac{\partial v}{\partial t}\hat e_{z}
+\end{equation}
+defining the \textit{added mass} $M_{\text{add}}$ factor due to the motion of the fluid. Now if we want to set a motion equation for the fluid, we can see the force exerted by the fluid as an external one $\vec f$ such that the total force is
+\begin{equation}\label{intro.arf.eq:motion_eq1}
+    m_p\frac{\partial v}{\partial t} = f - M_{\text{add}}\frac{\partial v}{\partial t}\quad,
+\end{equation}
+now $f$ would be at the same time the opposing force that the piece of fluid around receives to the ball. This implies an equation of motion for that surrounding fluid, as the buyonant force plus the added mass force, but instead made to the fluid. That is
+\begin{equation}\label{intro.arf.eq:motion_eq2}
+    (\frac{4\pi R_p^3}{3}\rho_0 + M_{\text{add}})\frac{\partial\vec u}{\partial t} = f\quad.
+\end{equation}
+Now combining \eqref{intro.arf.eq:motion_eq1} and \eqref{intro.arf.eq:motion_eq2} we get
+\begin{align}
     \left(\rho_pV_p + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
     \left(\frac{4\pi\rho_pR_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\frac{4\pi\rho_0R_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
     \left(\rho_p + \frac{\rho_0}{2}\right)v_i &=\left(\rho_0 + \frac{\rho_0}{2}\right)u_i\nonumber\\
     v_i &=\frac{3\rho_0}{2\rho_p + \rho_0}u_i\quad.\label{intro.arf.eq:u_v_relation}
 \end{align}
-This final relation will ensure momentum conservation for \eqref{intro.arf.eq:A_un_vn}, where equal velocities $\vec u$ and $\vec v$ were assumed. In general, the actual velocity must be the one which is relative to the fluid in order to still satisfy \eqref{intro.arf.eq:vn_un}. Thus
+This final relation will ensure momentum conservation for \eqref{A_dipole_v}, where equal velocities $\vec u$ and $\vec v$ were assumed. In general, the actual velocity must be the one which is relative to the fluid in order to still satisfy \eqref{vn_un}. Thus
 \begin{equation}
     \vec A = \frac{R_p^3}{2}(\vec v - \vec u)\quad,
 \end{equation}
@@ -580,6 +645,156 @@ introducing the density contrast factor $f_2$ as
 \begin{equation}\label{intro.arf.eq:f2}
     f_2 = \frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\quad.
 \end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The vector field $\vec A$ appearing in the second term of \eqref{intro.arf.eq:sc_multipoles} (the dipole contribution) is related to the energy and the total momentum of the fluid when the particle is moving through it, as it transfers momentum back and for when oscillatory motion is achieved. The kinetic energy carried by the fluid has the following form:
+% \begin{equation}\label{intro.arf.eq:energy_int_vol}
+%     E = \frac{1}{2}\int_{\Sigma} \rho_0 u^2 dV\quad,
+% \end{equation}
+% where $\Sigma$ is a region that covers most of the outer fluid except the volume occupied by the particle. This region will be defined as a sphere of radius $R_\Sigma$ concentric to the particle, but this radius is so large that it may cover all the fluid, letting it tend to infinite \cite[~p.27]{Landau}. Defining $\vec v$ as the particle's velocity, this identity which is not too hard to show
+% \begin{equation}
+%     u^2 = v^2 + (\vec u + \vec v)\cdot(\vec u - \vec v)\quad
+% \end{equation}
+% will be  plugged into the integrand of \eqref{intro.arf.eq:energy_int_vol} to write
+% \begin{equation}
+%     \int_{\Sigma} u^2 dV = \int_{\Sigma} v^2 dV + \int_{\Sigma} u^2 dV + \int_{\Sigma} (\vec u + \vec v)\cdot(\vec u - \vec v) dV\quad.
+% \end{equation}
+% The first term of the right-hand side is simply $v^2(V_\Sigma - V_p)$ because the velocity of the particle does not depend on the spatial coordinates. Regarding the second term, we want to transform the volume integral to a surface integral by using the Gauss theorem. In order to do this, we write first the first factor as a gradient as follows:
+% \begin{equation}
+%     \partial_i(\phi + v_k r_k) = (\partial_i\phi + \partial_i(v_k r_k)) = u_i + v_k\partial_i r_k = u_i + v_k\delta_{ik} = u_i + v_i\quad,
+% \end{equation}
+% then, the divergence of the product shall be computed, taking into account that $\partial_i u_i = 0$ due to incompressibility and $\partial_i v_i = 0$ due to spatial independence, as
+% \begin{equation}
+%     \partial_i[(u_i - v_i)(\phi + v_kr_k)] = (u_i - v_i)\partial_i(\phi + v_k r_k)
+% \end{equation}
+% implying
+% \begin{equation}\label{intro.arf.eq:energy_int_surf}
+%     \int_{\Sigma} u^2 dV = v^2(V_\Sigma - V_p) + \oint_{\partial\Sigma} (\phi + \vec v\cdot\vec r)(\vec u - \vec v)\cdot\hat n dS 
+% \end{equation}
+% where $\partial\Sigma = S + S_p$, being $S$ the outer surface of the sphere of radius $R_\Sigma$ and $S_p$ the surface area of the particle. There is as boundary condition to be fulfilled at the surface of the particle. The normal component of the fluid velocity must be equal to the normal component of the particle velocity, leading to cancel the integration over $S_p$. As we have assumed incompressibility without any change of the volume of the object, only the dipole term of \eqref{intro.arf.eq:sc_multipoles} which includes $\vec A$ will contribute to the integration. This term might be written as
+% \begin{equation}\label{intro.arf.eq:phi_dipole}
+%     \vec A(t) \cdot \nabla\left(\frac{1}{r}\right) = -\vec A(t) \cdot \frac{\hat r}{r^2}\quad,
+% \end{equation}
+% and the velocity $\vec u$ as
+% \begin{equation}\label{intro.arf.eq:grad_phi_dipole}
+%     \vec u = \nabla\left(\vec A \cdot \frac{\hat r}{r^2}\right) = (\vec A \cdot \nabla)\frac{\hat r}{r^2} = \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{r^3}\quad.
+% \end{equation}
+% such that the integrand of \eqref{intro.arf.eq:energy_int_vol} becomes, considering that both the potential and the surface $S$ are centered at the origin so $\hat n = \hat r$ and $r = R_\Sigma$ we have
+% \begin{align}
+%     &\oint_{S} \left(-\vec A\cdot \frac{\hat r}{R_\Sigma^2} + R_\Sigma\vec v\cdot\hat r\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) (R_\Sigma^2d\Omega) \nonumber\\
+%     =&\oint_{S} \left(-\vec A\cdot\hat r + R_\Sigma^3(\vec v\cdot\hat r)\right)\left(\frac{3(\vec A\cdot\hat r) - \vec A\cdot\hat r}{R_\Sigma^3} - \vec v\cdot\hat r\right) d\Omega\quad,
+% \end{align}
+% and expanding the product and neglecting the term proportional to $R_\Sigma^{-3}$ due to be so small
+% \begin{align}
+%     &\oint_{S} \left((\vec A\cdot\hat r)\vec v + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r)\hat r - (\vec v\cdot\hat r)\vec A - R_\Sigma^3(\vec v\cdot\hat r)\vec v\right)\cdot\hat r d\Omega\nonumber\\
+%     =&\oint_{S} \left((\vec A\cdot\hat r)(\vec v\cdot\hat r) + 3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - (\vec v\cdot\hat r)(\vec A\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\nonumber\\
+%     =&\oint_{S} \left(3(\vec A\cdot\hat r)(\vec v\cdot\hat r) - R_\Sigma^3(\vec v\cdot\hat r)^2\right)d\Omega\quad.
+% \end{align}
+% As both $\vec A$ and $\vec v$ are constants in space, it is possible to let them out of the integration so that we end up integrating the dyadic product of the unit vectors giving one third of the identity matrix \cite[~p.28]{Landau}, leading to
+% \begin{align}
+%     &\oint_{S} \left(3(A_i\hat r_i)(v_k\hat r_k) - R_\Sigma^3(v_i\hat r_iv_k\hat r_k)\right)d\Omega \nonumber\\
+%     =&(3A_iv_k - R_\Sigma^3 v_iv_k)\oint_{S} \hat r_i\hat r_k d\Omega \nonumber\\
+%     =&(3A_iv_k - R_\Sigma^3 v_iv_k)\frac{4\pi}{3}\delta_{ij} \nonumber\\
+%     =&4\pi\left((\vec A\cdot\vec v) - \frac{R_\Sigma^3}{3}v^2\right)\quad.
+% \end{align}
+% With this result, it is possible to write the total energy defined in \eqref{intro.arf.eq:energy_int_vol} as 
+% \begin{align}
+%     E &= \frac{\rho_0}{2}\left(v^2\left(\frac{4\pi R_\Sigma^3}{3} - V_p\right) + 4\pi\left(\vec A\cdot\vec v - \frac{R_\Sigma^3}{3}\right)\right)\nonumber\\
+%     E &= \frac{\rho_0}{2}\left(4\pi\vec A\cdot\vec v - v^2V_p\right)\quad.\label{intro.arf.eq:energy_A}
+% \end{align}
+% The kinetic energy is related to the exchange of momentum between the particle and the fluid. Indeed, one expression for the energy may be defined using the symmetric induced-mass tensor $m_{ij}$, which is determined by the constant field $\vec A$ and it would be useful to find the momentum exerted by the motion of the object. This mass tensor is an added mass to the inertial of the object when it moves in an immersed fluid. Indeed, from the momentum equation written in its integral form we can identify the following terms:
+% \begin{equation}
+%     \int_V\frac{\partial}{\partial t}(\rho u_i) dV = \dot{M_i}
+% \end{equation}
+% and
+% \begin{equation}
+%     \int_V\frac{\partial}{\partial x_j}(\rho u_i u_j) dV = \dot{M_i^{\text{out}}}\quad,
+% \end{equation}
+% such that the momentum conservation equation would be
+% \begin{equation}
+%     F_i = \frac{dM_i}{dt} + \dot{M_i^{\text{out}}}\quad.
+% \end{equation}
+% The energy is then written as 
+% \begin{equation}
+%     E = \frac{1}{2}m_{ij}v_iv_j\quad,
+% \end{equation}
+% and the momentum is related to the energy considering a force $\vec F$ exerted by the object which produces a change in momentum $d\vec P$ calculated via
+% \begin{equation}
+%     d\vec P = \vec F dt \quad,
+% \end{equation}
+% multiplying by the velocity of the sphere we can see that the energy appears naturally
+% \begin{equation}\label{intro.arf.eq:dP_dE}
+%     \vec v\cdot d\vec P = \vec v\cdot\vec F dt = dE\quad.
+% \end{equation}
+% being clear that the momentum is obtained in terms of $\vec A$, by comparing \eqref{intro.arf.eq:energy_A} and \eqref{intro.arf.eq:dP_dE}, as
+% \begin{equation}\label{intro.arf.eq:P_A}
+%     \vec P = \rho_0\left(4\pi\vec A - V_p\vec v\right)\quad,
+% \end{equation}
+% and it's also obtained in terms of the induced-mass tensor as
+% \begin{equation}\label{intro.arf.eq:P_mij}
+%     P_i = m_{ij}v_j\quad.
+% \end{equation}
+% Regarding the motion of the particle itself, there are enough elements to write a motion equation for it, taking into account that the recently calculated momentum is returned back to the particle by third Newton's law and the driven force made by the fluid, for now considered as an external force $\vec f$. The motion equation is then
+% \begin{equation}\label{intro.arf.eq:motion_eq_left}
+%     m_p\frac{d\vec v}{dt} + \frac{d\vec P}{dt} = \vec f\quad,
+% \end{equation}
+% and the left-hand side may be written using \eqref{intro.arf.eq:P_mij} as
+% \begin{equation}\label{intro.arf.eq:motion_eq_tensor_left}
+%     (m_p\delta_{ij} + m_{ij})\frac{d v_j}{dt} = f_i\quad.
+% \end{equation}
+% The external force is made by the fluid to provoke an oscillatory driven motion. If the volume occupied by the particle was completely occupied by the fluid and the velocity of this body is the same as the fluid, the carried momentum would be simply $\rho_0V_p\vec u$ and the force its derivative in time, with $\vec u$ the velocity of the fluid at the position of the particle if it were not there. However, the body is going with its own speed $\vec v$ which will not always coincide with $\vec u$, thus, the total momentum requires and additional term regarding the exchange of momentum with the fluid. This term is basically \eqref{intro.arf.eq:P_mij} but the velocity in the product will be instead the relative velocity between the particle and the fluid, which is $\vec u - \vec v$. In this sense, the total momentum is computed by
+% \begin{equation}\label{intro.arf.eq:motion_eq_fluid}
+%     m_p\frac{dv_i}{dt} = \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{d}{dt}(v_j - u_j)\quad,
+% \end{equation}
+% simplified as
+% \begin{align}
+%     m_p\delta_{ij}\frac{dv_j}{dt} &= \rho_0 V_p\frac{du_i}{dt} - m_{ij}\frac{dv_j}{dt} + m_{ij}\frac{du_j}{dt}\nonumber\\
+%     (m_p\delta_{ij} + m_{ij})\frac{dv_j}{dt} &=(\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}\quad.\label{intro.arf.eq:complete_eq_motion}
+% \end{align}
+% to identify the driven force at the right-hand side of \eqref{intro.arf.eq:motion_eq_left} in the form of
+% \begin{equation}
+%     f_i = (\rho_0V_p\delta_{ij} + m_{ij})\frac{du_j}{dt}
+% \end{equation}
+% and the following relation between the velocity of the fluid and the velocity of the particle:
+% \begin{equation}\label{intro.arf.eq:u_v_equation}
+%     (m_p\delta_{ij} + m_{ij})v_j =(\rho_0V_p\delta_{ij} + m_{ij})u_j\quad,
+% \end{equation}
+% obtained after integrating \eqref{intro.arf.eq:complete_eq_motion} respect to time. This expression is essential to obtain a velocity potential which conserves the momentum during the fluid-particle interaction. One boundary condition which is left to approach, barely mentioned, is the one were the normal velocities matches
+% \begin{equation}\label{intro.arf.eq:vn_un}
+%     \vec u\cdot\hat r = \vec v\cdot \hat r\quad.
+% \end{equation}
+% In order to include this boundary condition, the expression \eqref{intro.arf.eq:grad_phi_dipole} will help on this purpose in the following way:
+% \begin{align}
+%     \frac{3(\vec A\cdot\hat r)\hat r - \vec A}{R_p^3}\cdot\hat r &= \vec v\cdot \hat r\nonumber\\
+%     \frac{2(\vec A\cdot\hat r)}{R_p^3} &= \vec v\cdot\hat r\nonumber\\
+%     \vec A\cdot\hat r &= \frac{R_p^3}{2} (\vec v\cdot\hat r) \nonumber\\
+%     \vec A &= \frac{R_p^3}{2} \vec v\quad.\label{intro.arf.eq:A_un_vn}
+% \end{align}
+% We could do this short calculation from the beginning, but \eqref{intro.arf.eq:A_un_vn} does not fulfills momentum conservation. Instead, it will provide information about the induced mass tensor equaling \eqref{intro.arf.eq:P_A} and \eqref{intro.arf.eq:P_mij}
+% \begin{align}
+%     m_{ij}v_j &= \rho_0\left(\frac{4\pi R_p^3}{2} - \frac{4\pi R_p^3}{3} \right)v_i\nonumber\\
+%     m_{ij}&= \frac{2\pi\rho_0R_p^3}{3}\delta_{ij}\label{intro.arf.eq:m_ij_A}
+% \end{align}
+% Also, it will let us find the actual field which already satisfies momentum conservation rewritting \eqref{intro.arf.eq:u_v_equation} as
+% \begin{align}
+%     (m_p\delta_{ij} + m_{ij})v_j &=(\rho_0V_p\delta_{ij} + m_{ij})u_j\nonumber\\
+%     \left(m_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}v_j &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)\delta_{ij}u_j\nonumber\\
+%     \left(\rho_pV_p + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\rho_0V_p + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
+%     \left(\frac{4\pi\rho_pR_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)v_i &=\left(\frac{4\pi\rho_0R_p^3}{3} + \frac{2\pi\rho_0R_p^3}{3}\right)u_i\nonumber\\
+%     \left(\rho_p + \frac{\rho_0}{2}\right)v_i &=\left(\rho_0 + \frac{\rho_0}{2}\right)u_i\nonumber\\
+%     v_i &=\frac{3\rho_0}{2\rho_p + \rho_0}u_i\quad.\label{intro.arf.eq:u_v_relation}
+% \end{align}
+% This final relation will ensure momentum conservation for \eqref{intro.arf.eq:A_un_vn}, where equal velocities $\vec u$ and $\vec v$ were assumed. In general, the actual velocity must be the one which is relative to the fluid in order to still satisfy \eqref{intro.arf.eq:vn_un}. Thus
+% \begin{equation}
+%     \vec A = \frac{R_p^3}{2}(\vec v - \vec u)\quad,
+% \end{equation}
+% and with \eqref{intro.arf.eq:u_v_relation} the definitive expression for $\vec A$ is gotten:
+% \begin{equation}\label{intro.arf.eq:A_field_Rp}
+%     \vec A(t) = \frac{R_p^3}{2}\left(\frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\right)\vec u\quad,
+% \end{equation}
+% introducing the density contrast factor $f_2$ as
+% \begin{equation}\label{intro.arf.eq:f2}
+%     f_2 = \frac{2(\rho_p-\rho_0)}{2\rho_p+\rho_0}\quad.
+% \end{equation}
 With \eqref{intro.arf.eq:a_field_Rp} and \eqref{intro.arf.eq:A_field_Rp} it is now possible to write a particular solution for the scattered velocity potential, previously defined in terms of $a(t_{\text{ret}})$ and $\vec A(t_{\text{ret}})$, of the form
 \begin{equation}
     \phi_{\text{sc}}(r,t) = -f_1\frac{R_p^3}{3\rho_0 r}\dot{\rho_{\text{in}}} - f_2\frac{R_p^3}{2r^2}\nabla\cdot\left(\frac{\vec u_{\text{in}}}{r}\right)\quad,
